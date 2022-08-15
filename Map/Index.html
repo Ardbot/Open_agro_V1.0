@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Навигация</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+  <!-- Грузим стили -->
+  <link rel="stylesheet" href="index.css" />
+  <link rel="stylesheet" href="leaflet/leaflet.css" />
+
+  <!-- Грузим стили поисковика -->
+  <link rel="stylesheet" href="search/leaflet-search.css" />
+</head>
+
+<body>
+    <div id="map" class="map" display="flex"></div>
+
+    <!-- 1. Грузим векторные слои -->
+    <script src="layers/field.js"></script>
+    <script src="layers/alias.js"></script> 
+    <!-- <script src="layers/kadastr.js"></script> -->
+  
+    <!-- 2. Грузим скрипты -->
+    <!-- Основные модули -->
+    <script src="leaflet/leaflet.js"></script>
+  
+    <!-- Пользовательские модули -->
+
+    <!-- Главный скрипт -->
+    <script src="index.js"></script>
+</body>
+</html>
