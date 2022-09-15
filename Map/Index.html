@@ -15,18 +15,36 @@
 </head>
 
 <body>
-    <div id="map" class="map" display="flex"></div>
+  <div id="nav">
+    <div class="nav_div">
+      <label for="">A</label><input type="text"><button>Моё местоположение</button><br>
+      <label for="">B</label><input type="text"><button>На карте</button><br>
 
-    <!-- 1. Грузим векторные слои -->
-    <script src="layers/field.js"></script>
-    <script src="layers/alias.js"></script> 
-  
-    <!-- 2. Грузим скрипты -->
-    <!-- Основные модули -->
-    <script src="leaflet/leaflet.js"></script>
+    </div>
+    <div class="nav_div">
+      <label for="Зум">Масштаб </label><label for="Зум">00</label><br>
+    </div>
+    <div class="nav_div">
+      <button>Моё местоположение</button><br>
+      <label><input type="checkbox">Отслеживать</label>
+    </div>
+    <div class="nav_div">
+      <button>Очистить карту</button>
+    </div>
+  </div>
+  <div id="map" class="map" display="flex"></div>
+
+  <!-- 1. Грузим векторные слои -->
+  <script src="layers/field.js"></script>
+  <script src="layers/alias.js"></script>
+
+  <!-- 2. Грузим скрипты -->
+  <!-- Основные модули -->
+  <script src="leaflet/leaflet.js"></script>
 
 
-    <!-- Главный скрипт -->
-    <script src="index.js"></script>
+  <!-- Главный скрипт -->
+  <script src="index.js"></script>
 </body>
+
 </html>
