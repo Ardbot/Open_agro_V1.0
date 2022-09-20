@@ -1,4 +1,4 @@
-var start_point = [50.21631853, 127.95687106]
+var start_point = [50.253313,127.8073497]
 var end_point = []
 
 // const tilesPatch = 'localhost:8080/tiles/'
@@ -13,6 +13,8 @@ var map = L.map('map', { // Используется библиотека Leafle
     maxZoom: 18,
     fullscreenControl: true
 }).setView(start_point, 13);
+
+
 
 // Подключение базовых слоев (подложек)
 // Подключение OSM
@@ -87,10 +89,6 @@ var overlays = {
   // Выводим панель управления слоями на карту
 L.control.layers(baseLayers, overlays).addTo(map)
 
-// Элемент зума (Масштаба)
-// map.zoomControl.remove(); // Удаляет стандартную панель
-L.control.zoom({
-    position: 'bottomright'
-  }).addTo(map);
 
+  
   
