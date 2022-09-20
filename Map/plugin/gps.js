@@ -2,33 +2,33 @@
 
 
 // Функция местоположение пользователя.
-function location_user(watch=false, setView=false) {
+function location_user(_watch = false, _setView = false) {
   // Единоразово отображает местоположение.
+  let gps_point = []
   map.locate({
-    watch: watch,
-    setView:setView
+    watch: _watch,  // Включает GPS
+    setView: _setView  // Включает слежение за позицией
   }
   )
     // Если удалось получить координаты
     .on('locationfound', function (e) {
-      let start_point = [e.latitude, e.longitude]; // Текущая координата
-      buff(start_point, e.accuracy/2)
-      console.log(start_point);
-      return start_point
+      gps_point = [e.latitude, e.longitude]; // Текущая координата
+      buff(gps_point, e.accuracy / 2)
     }
     )
     // Если координат получить не удалось
     .on('locationerror', function (e) {
-      alert("Включите геолокацию или выберете точку самостоятельно.\n" + e.message)
-      return e.message
+      // alert("Включите геолокацию или выберете точку самостоятельно.\n" + e.message)
+      // return e.message
     })
-
+  return gps_point
 }
 
 // Моя позиция
 $("#gps").on("click", function () {
-  // alert('ok')
-  location_user()
+  data = location_user()
+  console.log(data);
+  map.setView(data, 16)
 })
 
 
@@ -56,23 +56,28 @@ $("#clear_gps_groop").on("click", function () {
   gps_groop.clearLayers();
 })
 
-
+// Включаем навигацию
 $('#gps_on').click(function () {
   if ($('#gps_on').is(':checked')) {
-    location_user(watch=true,setView=true)
+    location_user(_watch = true)
+    $(".gps").prop("disabled", false);
   } else {
     map.stopLocate()
+    $(".gps").prop("disabled", true);
   }
 })
 
-
+// Следуем за навигацией
 $('#gps_check').click(function () {
   if ($('#gps_check').is(':checked')) {
     map.locate({
       setView: true
     })
-  } else {
 
+  } else {
+    map.locate({
+      setView: false
+    })
   }
 });
 

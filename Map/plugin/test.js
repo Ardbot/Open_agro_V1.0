@@ -1,5 +1,5 @@
 $("#test").on("click", function () {
-var latLon = L.latLng(50.253313,127.8073497);
-var bounds = latLon.toBounds(5000); // 500 = metres
-map.panTo(latLon).fitBounds(bounds);
+    current_point = location_user(_watch=true)
+    console.log(current_point);
+    // map.setView(current_point)
 })
