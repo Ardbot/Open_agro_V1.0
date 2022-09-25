@@ -37,7 +37,7 @@ function location_user() {
       buff(e.latlng, e.accuracy / 2)
       resolve(e)
     })
-    // Если ошибка
+      // Если ошибка
       .on('locationerror', function (e) {
         reject(e.message)
       })
@@ -47,8 +47,11 @@ function location_user() {
 function geo_ok(result) {
   // console.log(result);
   latlng = result.latlng
-  map.setView(latlng, 14)
+  // map.setView(latlng, 14)
   buff(latlng, result.accuracy / 2)
+  console.log(result);
+
+  send_geo()
   return result
 }
 
@@ -93,14 +96,20 @@ $("#clear_gps_groop").on("click", function () {
 $('#gps_on').click(function () {
   if ($('#gps_on').is(':checked')) {
     map.locate({
-      watch: true
+      watch: always
     })
+    location_user()
+
     $(".gps").prop("disabled", false);
   } else {
     map.stopLocate()
     $(".gps").prop("disabled", true);
   }
 })
+
+// $('#gps_on').  //click(function () {
+
+//})
 
 // Следуем за навигацией
 $('#gps_check').click(function () {

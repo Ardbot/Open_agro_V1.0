@@ -9,6 +9,8 @@
   <!-- Грузим стили -->
   <link rel="stylesheet" href="index.css" />
   <link rel="stylesheet" href="leaflet/leaflet.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol/dist/L.Control.Locate.min.css" />
+
 
   <!-- Грузим стили поисковика -->
   <!-- <link rel="stylesheet" href="search/leaflet-search.css" /> -->
@@ -41,20 +43,25 @@
 
   <!-- 1. Грузим векторные слои -->
   <script src="layers/field.js"></script>
+  <script src="layers/graph.js"></script>
   <!-- <script src="layers/alias.js"></script> -->
 
   <!-- 2. Грузим скрипты -->
   <!-- Основные модули -->
   <script src="leaflet/leaflet.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol/dist/L.Control.Locate.min.js" charset="utf-8"></script>
   
 
 
 
   <!-- Главный скрипт -->
   <script src="index.js"></script>
+  <script src="config.js"></script>
   <script src="plugin/gps.js"></script>
   <script src="plugin/canvas.js"></script>
+  <script src="plugin/telegram.js"></script>
   <script src="plugin/test.js"></script>
+  
 </body>
 
 </html>
