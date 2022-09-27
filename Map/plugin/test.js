@@ -21,10 +21,10 @@ function send_geo() {
         api = '51641..'
         chat_id = '7452...'
         // 2. Настраиваем его: GET-запрос по URL /article/.../load
-        xhr.open('GET', 'https://api.telegram.org/bot' + api + '/sendMessage?chat_id=' + chat_id + '&text=' + geo);
+        // xhr.open('GET', 'https://api.telegram.org/bot' + api + '/sendMessage?chat_id=' + chat_id + '&text=' + geo);
 
         // 3. Отсылаем запрос
-        xhr.send();
+        // xhr.send();
 
         // 4. Этот код сработает после того, как мы получим ответ сервера
         xhr.onload = function () {
@@ -34,6 +34,8 @@ function send_geo() {
                 // alert(`Готово, получили ${xhr.response.length} байт`); // response -- это ответ сервера
             }
         }
+        console.log(e.latlng.lat);
+        return e
     })
 }
 

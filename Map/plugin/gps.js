@@ -1,5 +1,18 @@
 // Группа слоёв для GPS
 
+var overlays = {
+  "Дороги": graph
+}
+// L.control.layers().addOverlay(overlays1).addTo(map)
+// L.control.addOverlay(graph, "Дороги");
+// L.control.layers(overlays).addOverlay(graph, "Дороги").addTo(map)
+
+
+layerGroup = L.layerGroup().addLayer(graph).addLayer(graph).addLayer(graph).addTo(map);
+
+layer_control.addOverlay(layerGroup , "My batch of vectors");
+layer_control.addOverlay(layerGroup , "My batch of vectors");
+layer_control.addOverlay(layerGroup , "My batch of vectors");
 
 // Функция местоположение пользователя.
 // function location_user(_watch = false, _setView = false) {
@@ -65,7 +78,7 @@ function geo_err(error) {
 // Моя позиция
 $("#gps").on("click", function () {
   const data = location_user()
-  data.then(geo_ok, geo_err);
+  data.then(geo_ok, geo_err); 
 })
 
 
