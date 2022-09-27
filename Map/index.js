@@ -1,4 +1,4 @@
-var start_point = [50.21631853, 127.95687106]
+var start_point = [50.253313,127.8073497]
 var end_point = []
 
 // const tilesPatch = 'localhost:8080/tiles/'
@@ -13,6 +13,8 @@ var map = L.map('map', { // Используется библиотека Leafle
     maxZoom: 18,
     fullscreenControl: true
 }).setView(start_point, 13);
+
+
 
 // Подключение базовых слоев (подложек)
 // Подключение OSM
@@ -54,6 +56,24 @@ var field = L.geoJson(field, { // Грузит файл field.js из папки
     }
 }).addTo(map); // Сразу добавляет слой на карту
 
+
+var graph = L.geoJson(graph, { // Грузит файл field.js из папки "layers"
+  onEachFeature: function (feature, lyr) {
+      // Выводим ярлык с номером поля (можно HTML)
+      let text_html = '<div><h3>Дорога №' + feature.properties.name + '</h3>'
+      lyr.bindPopup(text_html);
+      // Выводится ярлык при наведении
+      // lyr.bindTooltip("Поле №: "+ feature.properties.Name).openTooltip();
+  },
+  style: {
+      "color": "#006e00", // Цвет контура
+      "weight": 1, // Толщина контура
+      "opacity": 0.65, // Прозрачность контура
+      // "fillColor": "#00FF00", // Заливка контура
+      "fillOpacity": 0, // Прозрачность заливки
+  }
+}).addTo(map); // Сразу добавляет слой на карту
+
 // // Контура зон (alias)
 // var alias = L.geoJson(alias, { // Грузит файл alias.js из папки "layers"
 //     onEachFeature: function (feature, lyr) {
@@ -80,17 +100,16 @@ var baseLayers = {
   // Слои поверх подложки
 var overlays = {
     "Поля": field,
+    "Дороги": graph
     // "Зоны": alias,
     // "Карта с БПЛА": photo_UAV, //Иначе использовать другую подложку
   };
 
   // Выводим панель управления слоями на карту
 L.control.layers(baseLayers, overlays).addTo(map)
+L.control.locate().addTo(map);
 
-// Элемент зума (Масштаба)
-// map.zoomControl.remove(); // Удаляет стандартную панель
-L.control.zoom({
-    position: 'bottomright'
-  }).addTo(map);
 
+
+  
   

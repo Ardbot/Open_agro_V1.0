@@ -9,24 +9,59 @@
   <!-- Грузим стили -->
   <link rel="stylesheet" href="index.css" />
   <link rel="stylesheet" href="leaflet/leaflet.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol/dist/L.Control.Locate.min.css" />
+
 
   <!-- Грузим стили поисковика -->
-  <link rel="stylesheet" href="search/leaflet-search.css" />
+  <!-- <link rel="stylesheet" href="search/leaflet-search.css" /> -->
+
+    <!-- Подключаем jquery -->
+    <script type="text/javascript" src="jquery.js"></script>
 </head>
 
 <body>
-    <div id="map" class="map" display="flex"></div>
+  <div id="nav">
+    <!-- <div class="nav_div">
+      <label for="">A</label><input type="text"><button >Моё местоположение</button><br>
+      <label for="">B</label><input type="text"><button>На карте</button><br>
 
-    <!-- 1. Грузим векторные слои -->
-    <script src="layers/field.js"></script>
-    <script src="layers/alias.js"></script> 
+    </div> -->
+    <div class="nav_div">
+      <button id="gps">Моё местоположение</button><br>
+      <label><input type="checkbox" id="gps_on">Включить GPS</label> <br>
+      <label><input type="checkbox" id="gps_check" class="gps" disabled="true">Отслеживать</label>
+    </div>
+    <!-- <div class="nav_div">
+      <label for="Зум">Масштаб </label><label id="zoom" for="Зум">--</label><br>
+    </div> -->
+    <div class="nav_div">
+      <button id = "clear_gps_groop">Очистить карту</button><br>
+      <button id = "test">Тест функции</button>
+    </div>
+  </div>
+  <div id="map" class="map" display="flex"></div>
+
+  <!-- 1. Грузим векторные слои -->
+  <script src="layers/field.js"></script>
+  <script src="layers/graph.js"></script>
+  <!-- <script src="layers/alias.js"></script> -->
+
+  <!-- 2. Грузим скрипты -->
+  <!-- Основные модули -->
+  <script src="leaflet/leaflet.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol/dist/L.Control.Locate.min.js" charset="utf-8"></script>
   
-    <!-- 2. Грузим скрипты -->
-    <!-- Основные модули -->
-    <script src="leaflet/leaflet.js"></script>
 
 
-    <!-- Главный скрипт -->
-    <script src="index.js"></script>
+
+  <!-- Главный скрипт -->
+  <script src="index.js"></script>
+  <script src="config.js"></script>
+  <script src="plugin/gps.js"></script>
+  <script src="plugin/canvas.js"></script>
+  <script src="plugin/telegram.js"></script>
+  <script src="plugin/test.js"></script>
+  
 </body>
+
 </html>
