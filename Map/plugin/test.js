@@ -1,7 +1,8 @@
 $("#test").on("click", function () {
     // Начало
     // alert('тест gps')
-    send_geo()
+    // send_geo()
+    console.log(field);
 
     // повторить с интервалом 2 секунды
     // let timerId = setInterval(() => send_geo(), 2000);
