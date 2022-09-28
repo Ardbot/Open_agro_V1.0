@@ -1,3 +1,6 @@
+// Модуль местоположения
+L.control.locate().addTo(map);
+
 // Группа слоёв для GPS
 
 var overlays = {

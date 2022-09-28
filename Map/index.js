@@ -12,7 +12,7 @@ var map = L.map('map', { // Используется библиотека Leafle
   fullscreenControl: true
 }).setView(start_point, 13);
 
-// Подключение базовых слоев (подложек)
+// Подключение базового слоя (подложки)
 // Подключение OSM
 var tiles_OSM = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   opacity: 1.0, // Прозрачность подложки
@@ -20,10 +20,3 @@ var tiles_OSM = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
   minZoom: 0,
   maxZoom: 20
 }).addTo(map) // Добавляем на карту.
-
-
-L.control.locate().addTo(map);
-
-
-
-
