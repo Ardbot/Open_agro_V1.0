@@ -2,21 +2,25 @@
 
 import socket
 
-# HOST = "127.0.0.5"  # Standard loopback interface address (localhost)
-import time
 
-HOST = "0.0.0.0"  # Standard loopback interface address (localhost)
-PORT = 1002  # Port to listen on (non-privileged ports are > 1023)
-
-with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:    # создает объект сокета
-    s.bind((HOST, PORT))
-    s.listen()
-    conn, addr = s.accept()
-    with conn:
-        print(f"Connected by {addr}")
+def GPS_server(host="127.0.0.10", port=1024):  # Адрес и порт сервера
+    global server
+    try:
+        server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  # создает объект сокета
+        server.bind((host, port))
+        server.listen(10)  # Кол-во ожидаемых соединений
         while True:
+            conn, addr = server.accept()  # Произведено подключение
             data = conn.recv(1024)
-            if len(data) > 0:
-                # print(len(data))
-                print(data)
-                conn.sendall(b'#AL#1\r\n')
+            print(f'Connect to {addr}. Data: {data}')
+            conn.sendall(b'all_resp')
+            conn.shutdown(socket.SHUT_WR)
+            return data
+    except ConnectionResetError as e:
+        print('Error:', e)
+    finally:
+        server.close()
+
+
+if __name__ == '__main__':
+    GPS_server()

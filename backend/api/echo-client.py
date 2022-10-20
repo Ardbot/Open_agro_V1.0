@@ -3,13 +3,19 @@
 import socket
 import time
 
-HOST = "127.0.0.5"  # The server's hostname or IP address
-PORT = 1002  # The port used by the server
+HOST = "127.0.0.10"  # Подключение к серверу на IP 127.0.0.10
+PORT = 1024  # Порт сервера
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.connect((HOST, PORT))
-    s.sendall(b"Start client(GPS-track")
-    data = s.recv(1024)
-    while True:
-        s.sendall(b'#L#2.0;866******449525;NA;3CD\r\n')
-        time.sleep(5)
+    print(f'Connect to {HOST}:{PORT}')
+    message = b's.getsockname()'
+    s.sendall(message)  # Отправка запроса
+    # time.sleep(10)
+
+    while True:  # Чтение ответа в цикле
+        data = s.recv(1024)  # 1024 размер буфера
+        if not data:
+            s.close()
+            break
+        print(data)
