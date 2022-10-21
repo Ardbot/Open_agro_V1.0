@@ -1,26 +1,25 @@
-# echo-server.py
-
-import socket
+import socketserver
 
 
-def GPS_server(host="127.0.0.10", port=1024):  # Адрес и порт сервера
-    global server
-    try:
-        server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  # создает объект сокета
-        server.bind((host, port))
-        server.listen(10)  # Кол-во ожидаемых соединений
-        while True:
-            conn, addr = server.accept()  # Произведено подключение
-            data = conn.recv(1024)
-            print(f'Connect to {addr}. Data: {data}')
-            conn.sendall(b'all_resp')
-            conn.shutdown(socket.SHUT_WR)
-            return data
-    except ConnectionResetError as e:
-        print('Error:', e)
-    finally:
-        server.close()
+class MyTCPHandler(socketserver.BaseRequestHandler):
+    """
+    """
+
+    def handle(self):
+        # self.request is the TCP socket connected to the client
+        self.data = self.request.recv(1024).strip()
+        print("{} send:".format(self.client_address[0]))
+        print(self.data)
+        # just send back the same data, but upper-cased
+        self.request.sendall(self.data.upper())
 
 
-if __name__ == '__main__':
-    GPS_server()
+# HOST, PORT = "0.0.0.0", 1002
+
+def gps_server(host='0.0.0.0', port=1002):
+    with socketserver.TCPServer((host, port), MyTCPHandler) as server:
+        server.serve_forever()
+
+
+if __name__ == "__main__":
+    gps_server()
