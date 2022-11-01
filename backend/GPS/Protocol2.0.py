@@ -1,4 +1,8 @@
 import socket
+import logging
+
+logging.basicConfig(filename='app.log', format='%(asctime)s - %(message)s', datefmt='%d.%m.%y %H:%M:%S', level='DEBUG')
+
 
 """
 Протокол Wialon 2.0/ Умка3.10
@@ -21,12 +25,13 @@ def gps_server(host='', port=1024):
             sock.listen(10)
             conn, addr = sock.accept()
             print('connected:', addr)
+            logging.info(f'Start server {addr}')
             while True:
                 data = conn.recv(1024)
                 if not data:
                     pass
                     break
-                print(data)
+                print('INPUT:', data)
                 type_package(str(data, "utf-8"))
                 conn.send(data.upper())
             # print('close connection')
@@ -39,29 +44,30 @@ package_data = '#L#2.0;860000000000002;NA;817D'
 
 
 def type_package(package):
+    """1) Определяем тип пакета и парсим"""
     try:
-        """1) Определяем тип пакета и парсим"""
-        print(package[0])
         if package[0] == '#':
             pkg_name = package.split('#')[1]
             match pkg_name:
                 case 'B':
-                    print('Черный ящик')
+                    # print('Черный ящик')
+                    pass
                 case 'L':
-                    print('Авторизация')
+                    # print('Авторизация')
                     handshake(package)
                 case _:
                     print('Пакет не распознан')
+                    logging.info(f'Package "{pkg_name}" not recognized')
         else:
             print('Отсутствует стартовый байт (#')
     except Exception as e:
         print('ERR:', e)
+        logging.warning('ERR', e)
 
 
 def handshake(package):
     """2) Парсинг и проверка соответствия пакета с данными и подтверждение"""
     package = package.split(';')
-    print(package)
 
     # Предварительная проверка
     if len(package) == 4:
@@ -73,19 +79,40 @@ def handshake(package):
         msg = f'Err package {len(package)}/4'
         print(msg)
         return msg
+
     status = {'protocol': protocol(protocol_version),
               'IMEI': IMEI(imei),
-              'pass': check_pass(password),
+              'pass': check_pass(imei, password),
               'csum': check_sum(control_sum)}
-    print(status)
+    code = check_package(status)
+    print('Kod:', code)
+    return f'#AL#{code}\r\n'
+    # Конец кода
 
-    for val in status:
-        if status[val] == 'OK':
-            print(val, status[val])
-        else:
-            print('\033[31mERR', val, status[val], '\033[0m')
 
-    return f'#AL#{1}\r\n'
+
+def check_package(status):
+    """Проверка пакета"""
+    try:
+        print(status)
+        for key in status:
+            if status[key] == 'OK':
+                print(key, status[key])
+            else:
+                # Если есть ошибка, то возвращаем ее или 0
+                match status[key]:
+                    case '10':  # см. докуметацию
+                        return '10'
+                    case '01':
+                        # logging.info('01')
+                        return '01'
+                    case _:
+                        # logging.info('0')
+                        return '0'
+        print('Успешный успех!')
+        return '1'
+    except Exception as e:
+        logging.warning('ERR', e)
 
 
 def protocol(protocol_version):
@@ -93,51 +120,43 @@ def protocol(protocol_version):
     protocol_version = protocol_version.split('#')[2]
     match protocol_version:
         case '2.0':
-            msg = f'OK'
-            return msg
-        case '1.0':
-            msg = '1.0'
-            print('1.0')
-            return msg
+            return 'OK'
+        # case '1.0':
+        #     msg = '1.0'
+        #     return msg
         case _:
-            msg = f'Wrong protocol version ({protocol_version})'
-            print(msg)
-            return msg
+            logging.warning(f'Protocol version mismatch: ({protocol_version})')
+            return '0'
 
 
 def IMEI(imei):
     """Парсинг IMEI"""
-    # print(imei)
-
     if imei in db:
-        print('Авторизован')
         return 'OK'
     else:
-        print('Неизвестное устройство')
-        return 'No IMEI in database'
+        logging.warning(f'Device {imei} not found')
+        return '0'
 
 
-def check_pass(password):
+def check_pass(imei, password='NA'):
     """Проверка пароля"""
-
     if password == 'NA':
-        msg = 'OK'
-        return msg
+        return 'OK'
+
     # elif: #     проверка пароля в базе данных
     # pass
     else:
-        msg = 'not true'
-        return msg
+        logging.warning(f'Device {imei}. Password verification error')
+        return '01'
 
 
 def check_sum(control_sum):
     """Проверка контрольной суммы"""
-    if control_sum == '817D':
-        msg = 'OK'
-        return msg
+    if control_sum:
+        return 'OK'
     else:
-        msg = 'not true'
-        return msg
+        logging.debug('Checksum verification error')
+        return '10'
 
 
 if __name__ == "__main__":
