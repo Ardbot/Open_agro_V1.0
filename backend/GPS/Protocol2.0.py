@@ -20,20 +20,22 @@ def gps_server(host='', port=1024):
     """Сервер для сокетов"""
     sock = socket.socket()
     sock.bind((host, port))
+    logging.info(f'Start server {host}:{port}')
     while True:
         try:
             sock.listen(10)
             conn, addr = sock.accept()
             print('connected:', addr)
-            logging.info(f'Start server {addr}')
+
             while True:
                 data = conn.recv(1024)
                 if not data:
                     pass
                     break
                 print('INPUT:', data)
-                type_package(str(data, "utf-8"))
-                conn.send(data.upper())
+                response = type_package(str(data, "utf-8"))
+                print(response)
+                conn.send(bytes(response, "utf-8"))
             # print('close connection')
             conn.close()
         except Exception as e:
@@ -54,7 +56,7 @@ def type_package(package):
                     pass
                 case 'L':
                     # print('Авторизация')
-                    handshake(package)
+                    return handshake(package)
                 case _:
                     print('Пакет не распознан')
                     logging.info(f'Package "{pkg_name}" not recognized')
@@ -86,7 +88,7 @@ def handshake(package):
               'csum': check_sum(control_sum)}
     code = check_package(status)
     print('Kod:', code)
-    return f'#AL#{code}\r\n'
+    return f'#AL#{code}\\r\\n'
     # Конец кода
 
 

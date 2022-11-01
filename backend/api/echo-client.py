@@ -1,8 +1,10 @@
 import socket
 import sys
 
-HOST, PORT = "192.168.18.1", 1002
-data = "#L#2.0;860000000000002;NA;817D"
+HOST, PORT = "127.0.0.1", 1002
+data = ["#L#2.0;860000000000002;NA;817D", "#L#2.1;860000000000002;NA;817D",
+        "#L#2.0;860000000000012;NA;817D", "#L#2.0;860000000000002;N1A;817D",
+        "#L#2.0;860000000000002;NA;8171D"]
 # data = "#L#;dff;NA;8157D"
 
 
@@ -18,7 +20,10 @@ def send_data(data):
 
     print("Sent:     {}".format(data))
     print("Received: {}".format(received))
+    print(received)
 
 
 if __name__ == '__main__':
-    send_data(data)
+    for i in range(5):
+        print(i)
+        send_data(data[i])
