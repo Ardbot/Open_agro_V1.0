@@ -25,10 +25,10 @@ def gps_server(host='', port=1024):
                 data = conn.recv(1024)
                 if not data:
                     pass
-                    # break
+                    break
                 print(data)
-                type_package(str(data))                conn.send(data.upper())
-)
+                type_package(str(data, "utf-8"))
+                conn.send(data.upper())
             # print('close connection')
             conn.close()
         except Exception as e:
@@ -39,17 +39,23 @@ package_data = '#L#2.0;860000000000002;NA;817D'
 
 
 def type_package(package):
-    """1) Определяем тип пакета и парсим"""
-    print('TP', package)
-    pkg_name = package.split('#')[1]
-    match pkg_name:
-        case 'B':
-            print('Черный ящик')
-        case 'L':
-            print('Авторизация')
-            handshake(package)
-        case _:
-            print('Пакет не распознан')
+    try:
+        """1) Определяем тип пакета и парсим"""
+        print(package[0])
+        if package[0] == '#':
+            pkg_name = package.split('#')[1]
+            match pkg_name:
+                case 'B':
+                    print('Черный ящик')
+                case 'L':
+                    print('Авторизация')
+                    handshake(package)
+                case _:
+                    print('Пакет не распознан')
+        else:
+            print('Отсутствует стартовый байт (#')
+    except Exception as e:
+        print('ERR:', e)
 
 
 def handshake(package):
