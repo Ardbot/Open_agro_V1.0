@@ -2,7 +2,8 @@ import socket
 import sys
 
 HOST, PORT = "192.168.18.1", 1002
-data = "Hello"
+data = "#L#2.0;860000000000002;NA;817D"
+# data = "#L#;dff;NA;8157D"
 
 
 def send_data(data):
