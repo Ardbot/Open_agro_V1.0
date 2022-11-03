@@ -1,8 +1,8 @@
-import socket
 import logging
+import socketserver
 
 logging.basicConfig(filename='app.log', format='%(asctime)s - %(message)s', datefmt='%d.%m.%y %H:%M:%S', level='DEBUG')
-
+gpslog = logging.getLogger('GPS')
 
 """
 Протокол Wialon 2.0/ Умка3.10
@@ -15,34 +15,33 @@ db = ['860000000000001',
       '860000000000004',
       '860000000000005']
 
+package_data = '#L#2.0;860000000000002;NA;817D'
+
+
+class MyTCPHandler(socketserver.BaseRequestHandler):
+
+    def handle(self):
+        # Принимаю данные. Преобразую в строку. 1460 - размер пакета умка
+        self.input_data = str(self.request.recv(1460).strip(), "utf-8")
+        print('input:', self.input_data)
+
+        # Обрабатываю принятый запрос
+        self.output_data = type_package(self.input_data)
+        print('output:', self.output_data)
+        print()
+
+        # Отправляю результат клиенту
+        self.request.sendall((bytes(self.output_data, "utf-8")))
+
 
 def gps_server(host='', port=1024):
-    """Сервер для сокетов"""
-    sock = socket.socket()
-    sock.bind((host, port))
-    logging.info(f'Start server {host}:{port}')
-    while True:
-        try:
-            sock.listen(10)
-            conn, addr = sock.accept()
-            print('connected:', addr)
-
-            while True:
-                data = conn.recv(1024)
-                if not data:
-                    pass
-                    break
-                print('INPUT:', data)
-                response = type_package(str(data, "utf-8"))
-                print(response)
-                conn.send(bytes(response, "utf-8"))
-            # print('close connection')
-            conn.close()
-        except Exception as e:
-            return f'Error: {e}'
+    """ Запускаем сервер на сокетах. IP 0.0.0.0, port 1002"""
+    with socketserver.TCPServer((host, port), MyTCPHandler) as server:
+        server.serve_forever()
 
 
-package_data = '#L#2.0;860000000000002;NA;817D'
+
+""" Package L """
 
 
 def type_package(package):
@@ -53,7 +52,7 @@ def type_package(package):
             match pkg_name:
                 case 'B':
                     # print('Черный ящик')
-                    pass
+                    return black_box(package)
                 case 'L':
                     # print('Авторизация')
                     return handshake(package)
@@ -87,19 +86,19 @@ def handshake(package):
               'pass': check_pass(imei, password),
               'csum': check_sum(control_sum)}
     code = check_package(status)
-    print('Kod:', code)
+    # print('Kod:', code)
     return f'#AL#{code}\\r\\n'
     # Конец кода
-
 
 
 def check_package(status):
     """Проверка пакета"""
     try:
-        print(status)
+        # print(status)
         for key in status:
             if status[key] == 'OK':
-                print(key, status[key])
+                pass
+                # print(key, status[key])
             else:
                 # Если есть ошибка, то возвращаем ее или 0
                 match status[key]:
@@ -111,7 +110,6 @@ def check_package(status):
                     case _:
                         # logging.info('0')
                         return '0'
-        print('Успешный успех!')
         return '1'
     except Exception as e:
         logging.warning('ERR', e)
@@ -154,11 +152,53 @@ def check_pass(imei, password='NA'):
 
 def check_sum(control_sum):
     """Проверка контрольной суммы"""
-    if control_sum:
+    if control_sum == control_sum:
+        # написать сумматор
         return 'OK'
     else:
         logging.debug('Checksum verification error')
         return '10'
+
+
+""" Package B """
+
+
+def black_box(package):
+    """ Расшифровка пакетов B """
+    try:
+        data = package[3:-8].split('|')
+
+        count = parsing_B(data)
+
+        if count > 0:
+            return f'#AB#{count}\\r\\n'
+        else:
+            # Ошибка проверки контрольной суммы
+            return '#AB#\\r\\n'
+    except:
+        return '#AB#\\r\\n'
+
+def parsing_B(data):
+    key = ['Date', 'Time', 'Lat1', 'Lat2', 'Lon1', 'Lon2', 'Speed', 'Course', 'Alt', 'Sats']
+    count = 0
+    for val in data:
+        count += 1
+        spisok = {}
+        for i in range(10):
+            d = {key[i]: val.split(';')[i]}
+            spisok.update(d)
+            # print(d)
+            # if d.get('Lat1') != 'NA':
+            #     spisok.update(d)
+            # else:
+            #     print('Err')
+
+        print(spisok)
+
+    return count
+
+def data_to_geojson(data):
+    """ Сохранить в geojson """
 
 
 if __name__ == "__main__":
