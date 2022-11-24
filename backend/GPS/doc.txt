@@ -19,4 +19,24 @@ STATUS Пример: ID=1 Soft=0x1A GPS=9291 Time=11:21:39 25.02.10 Nav=0 Lat=50
 1   0x0D
 1   10x0A
 
-Ответ на запрос с терминала: STATUS 0x0D 0x0A  '0D,0A' - Символы перевода строки! \ r\n
+Ответ на запрос с терминала: STATUS0x0D0x0A  '0D,0A' - Символы перевода строки! \ r\n (STATUS\r\n)
+
+
+#L#2.0;866854055517109;NA;817D - ответ Умка10 WPS2.0
+
+
+На сокетах python
+
+Connected by ('192.168.18.1', 49563)
+b'#L#2.0;866854057449525;NA;3CD\r\n'
+b'#B#010104;000004;NA;NA;NA;NA;NA;NA;NA;NA;NA;3;0;;NA;status:1:2097252,bootcount:1:1|010104;000005;NA;NA;NA;NA;NA;NA;NA;NA;NA;3;0;;NA;status:1:2097188,bootcount:1:1|010104;000005;NA;NA;NA;NA;NA;NA;NA;NA;NA;1;0;;NA;status:1:2097188,bootcount:1:1|010104;000005;NA;NA;NA;NA;NA;NA;NA;NA;NA;1;1;;NA;status:1:2228260,bootcount:1:1|010104;000006;NA;NA;NA;NA;NA;NA;NA;NA;NA;3;1;;NA;status:1:2228260,bootcount:1:1|010104;000006;NA;NA;NA;NA;NA;NA;NA;NA;NA;3;0;;NA;status:1:2097188,bootcount:1:1|010104;000012;NA;NA;NA;NA;NA;NA;NA;NA;NA;3;0;;NA;status:1:2097188,bootcount:1:1|260522;110611;4503.8246;N;03859.7393;E;0;0;46;6;1.71;3;0;;NA;status:1:2097188,sats_gps:1:0,sats_glonass:1:6,bootcount:1:1|010104;000006;NA;NA;NA;NA;NA;NA;NA;NA;NA;0;0;;NA;status:1:100,bootcount:1:2|010104;000007;NA;NA;NA;NA;NA;NA;NA;NA;NA;0;0;;NA;status:1:36,bootcount:1:2|010104;000330;NA;NA;NA;NA;NA;NA;NA;NA;NA;0;0;;NA;status:1:548,bootcount:1:2|010104;000507;NA;NA;NA;NA;NA;NA;NA;NA;NA;0;0;;NA;status:1:548,bootcount:1:2|010104;001007;NA;NA;NA;NA;NA;NA;NA;N'
+b'A;NA;0;0;;NA;status:1:548,bootcount:1:2|010104;001507;NA;NA;NA;NA;NA;NA;NA;NA;NA;0;0;;NA;status:1:548,bootcount:1:2|010104;002007;NA;NA;NA;NA;NA;NA;NA;NA;NA;0;0;;NA;status:1:548,bootcount:1:2|010104;002507;NA;NA;NA;NA;NA;NA;NA;NA;NA;0;0;;NA;status:1:548,bootcount:1:2|010104;003007;NA;NA;NA;NA;NA;NA;NA;NA;NA;0;0;;NA;status:1:548,bootcount:1:2|010104;003507;NA;NA;NA;NA;NA;NA;'
+b'NA;NA;NA;0;0;;NA;status:1:548,bootcount:1:2|3F66'
+b'\r\n'
+
+b'#L#2.0;866854057449285;NA;69BB\r\n'
+b'#L#'
+b'#B#010104;000004;NA;NA;NA;NA;NA;NA;NA;NA;NA;3;0;;NA;status:1:2097252,bootcount:1:1|010104;000005;NA;NA;NA;NA;NA;NA;NA;NA;NA;3;0;;NA;status:1:2097188,bootcount:1:1|010104;000007;NA;NA;NA;NA;NA;NA;NA;NA;NA;1;0;;NA;status:1:2097188,bootcount:1:1|010104;000007;NA;NA;NA;NA;NA;NA;NA;NA;NA;1;1;;NA;status:1:2228260,bootcount:1:1|010104;000009;NA;NA;NA;NA;NA;NA;NA;NA;NA;3;1;;NA;status:1:2228260,bootcount:1:1|010104;000009;NA;NA;NA;NA;NA;NA;NA;NA;NA;3;0;;NA;status:1:2097188,bootcount:1:1|010104;000014;NA;NA;NA;NA;NA;NA;NA;NA;NA;3;0;;NA;status:1:2097188,bootcount:1:1|260522;110944;4503.8378;N;03859.7307;E;0;0;127;3;2.16;3;0;;NA;status:1:2097188,sats_gps:1:0,sats_glonass:1:3,bootcount:1:1|260522;111000;4503.8258;N;03859.7408;E;0;157;44;13;0.67;3;0;;NA;status:1:2097152,sats_gps:1:10,sats_glonass:1:3,bootcount:1:1|010104;000006;NA;NA;NA;NA;NA;NA;NA;NA;NA;0;0;;NA;status:1:100,bootcount:1:2|010104;000007;NA;NA;NA;NA;NA;NA;NA;NA;NA;0;0;;NA;status:1:36,bootcount:1:2|010104;000119;NA;NA;NA;NA;NA;NA;NA;NA;NA;0;0;;NA;status:1:100,bootcount:1:3|010104;000120;NA;NA;NA;NA;NA;NA;NA;NA;NA;0;0;;NA;status:1:100,bootcount:1:3|151022;053500;5014.8483;N;12746.0521;E;0;50;158;5;2.27;0;0;;NA;status:1:32,sats_gps:1:3,sats_glonass:1:2,bootcount:1:3|151022;053613;NA;NA;NA;NA;NA;NA;NA;NA;NA;0;0;;NA;status:1:100,bootcount:1:4|151022;053615;5014.8492;N;12746.0516;E;2;237;161;6;2.03;0;0;;NA;status:1:36,sats_gps:1:4,sats_glonass:1:2,bootcount:1:4|39A7\r\n'
+b'#B#'
+
+b'#B#260522;111000;4503.8258;N;03859.7408;E;0;157;44;13;0.67;3;0;;NA;status:1:2097152,sats_gps:1:10,sats_glonass:1:3,bootcount:1:1|010104;000006;NA;NA;NA;NA;NA;NA;NA;NA;NA;0;0;;NA;status:1:100,bootcount:1:2|010104;000007;NA;NA;NA;NA;NA;NA;NA;NA;NA;0;0;;NA;status:1:36,bootcount:1:2|010104;000119;NA;NA;NA;NA;NA;NA;NA;NA;NA;0;0;;NA;status:1:100,bootcount:1:3|010104;000120;NA;NA;NA;NA;NA;NA;NA;NA;NA;0;0;;NA;status:1:100,bootcount:1:3|151022;053500;5014.8483;N;12746.0521;E;0;50;158;5;2.27;0;0;;NA;status:1:32,sats_gps:1:3,sats_glonass:1:2,bootcount:1:3|151022;053613;NA;NA;NA;NA;NA;NA;NA;NA;NA;0;0;;NA;status:1:100,bootcount:1:4|151022;053615;5014.8492;N;12746.0516;E;2;237;161;6;2.03;0;0;;NA;status:1:36,sats_gps:1:4,sats_glonass:1:2,bootcount:1:4|151022;053649;5014.8485;N;12746.0420;E;3;92;161;6;2.04;0;0;;NA;status:1:4194304,sats_gps:1:4,sats_glonass:1:2,bootcount:1:4|151022;053820;5014.8485;N;12746.0406;E;4;91;159;7;1.81;0;0;;NA;status:1:0,sats_gps:1:4,sats_glonass:1:3,bootcount:1:4|151022;054025;5014.8490;N;12746.0507;E;3;251;150;8;1.76;0;0;;NA;status:1:0,sats_gps:1:4,sats_glonass:1:4,bootcount:1:4|151022;054525;5014.8509;N;12746.0464;E;0;285;149;8;1.73;0;0;;NA;status:1:64,sats_gps:1:4,sats_glonass:1:4,bootcount:1:4|151022;055025;5014.8509;N;12746.0464;E;0;285;149;9;1.62;0;0;;NA;status:1:64,sats_gps:1:4,sats_glonass:1:5,bootcount:1:4|112A\r\n'
