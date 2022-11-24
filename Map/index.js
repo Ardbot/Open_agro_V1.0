@@ -20,3 +20,6 @@ var tiles_OSM = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
   minZoom: 0,
   maxZoom: 20
 }).addTo(map) // Добавляем на карту.
+
+var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+console.log(autolinker);
