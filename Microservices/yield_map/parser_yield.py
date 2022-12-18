@@ -5,7 +5,7 @@ from pathlib import Path
 # Settings
 import geojson
 
-from backend.tools.generate_geojson import pars_point
+from Microservices.Tools.generate_geojson import pars_point
 
 PATH_TO_FILE = 'D:\DataBase\Сartography\Yield\\'  # Путь куда сохраняем
 SAVE_PATCH = 'D:\DataBase\Сartography\geojson\\'  # Путь куда сохраняем

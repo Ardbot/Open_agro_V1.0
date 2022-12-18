@@ -31,6 +31,11 @@ def main():
     cars = car_list()
     requests_days(cars)
 
+def identification():
+    """ Идентефикация пользователя """
+    LOGIN = input("Введите логин Claas:")
+    PASSWORD = input("Введите пароль Claas:")
+
 
 def car_list():
     url = 'https://rest.claas-telematics.com/TSRest/v001/prod/machines/filterentries/'

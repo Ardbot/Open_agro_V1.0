@@ -12,9 +12,11 @@ async function request_api(method, url, body = null){
             headers: { "Accept": "application/json", "Content-Type": "application/json" },
             body: JSON.stringify(body)
         });
-//        Если сервер ответил,
+//        Если сервер ответил 200-299,
         if (response.ok) {
+//                console.log('resp', response)
                 const data = await response.json();
+
                 if (data == null) {
                     console.log(url, ': No data')
                     return null
@@ -33,6 +35,13 @@ async function request_api(method, url, body = null){
             return value
         }
 }
+
+// Получение контуров полей
+async function get_field() {
+request_api('POST', '/api/map/fields')
+console.log('645456')
+}
+
 
 // Проверка данных в локальном хранилище
 function check_local_storage(key) {
@@ -58,7 +67,9 @@ function check_local_storage(key) {
 // setting Запрос настроек с сервера во время загрузки страницы.
 function get_setting() {
 request_api('POST', '/api/map/home')   // Стартовая точка
-request_api('GET', 'index.html')
+request_api('POST', '/api/map/fields')
+
+
 }
 
 var map = L.map('map', {
@@ -74,6 +85,28 @@ var tiles_OSM = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
   minZoom: 0,
   maxZoom: 20
 }).addTo(map) // Добавляем на карту.
+
+
+// Контура полей (fields)
+var field = L.geoJson(get_localStorage('/api/map/fields'), {
+  onEachFeature: function (feature, lyr) {
+
+
+    // Выводим ярлык с номером поля (можно HTML)
+    let text_html = '<div><h3>Поле №' + feature.properties.Name + '</h3><h4> Площадь: ' + feature.properties.area + ' га</h4></div>'//<button id="map_b1">Путь сюда</button>'
+    lyr.bindPopup(text_html);
+    // Выводится ярлык при наведении
+    // lyr.bindTooltip("Поле №: "+ feature.properties.Name).openTooltip();
+  },
+  style: {
+    "color": "#006eff", // Цвет контура файл (leaflet.js)
+    "weight": 1, // Толщина контура
+    "opacity": 0.65, // Прозрачность контура
+    "fillColor": "#00FF00", // Заливка контура
+    "fillOpacity": 0.04, // Прозрачность заливки
+  }
+}).addTo(map); // Сразу добавляет слой на карту
+
 
 //Установка точки
 function setView(start_point = [50, 128], zoom = 10) {
