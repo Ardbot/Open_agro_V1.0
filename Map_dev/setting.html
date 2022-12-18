@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Настройки карты</title>
+    <meta charset="utf-8"/>
+</head>
+<body>
+
+
+<p>
+<div id="identification">login</div>
+<button onclick="send()">Отправить</button>
+
+<p>
+    Введите название культуры: <br/>
+    <input name="culture" id="culture"/>
+<p>
+    Выберете дату начала уборочной: <br/>
+    <input name="start_yeild" id="start_yeild" type="date" value="2022-08-01"/>
+
+<p>
+    Выберете дату окончание уборочной: <br/>
+    <input name="end_yeild" id="end_yeild" type="date" value="2022-11-30"/>
+
+<button onclick="send()">Отправить</button>
+
+<p>
+<div id="message">technique</div>
+<div id="err">error = none</div>
+
+<!--<script>-->
+<!--    async function send(){-->
+
+<!--        // получаем введеное в поле имя и возраст-->
+<!--        const culture = document.getElementById("culture").value;-->
+<!--        const start_yeild = document.getElementById("start_yeild").value;-->
+<!--        const end_yeild = document.getElementById("end_yeild").value;-->
+
+<!--        // отправляем запрос-->
+<!--        const response = await fetch("/api/map/home", {-->
+<!--                method: "POST",-->
+<!--                headers: { "Accept": "application/json", "Content-Type": "application/json" },-->
+<!--                body: JSON.stringify({-->
+<!--                    culture: culture,-->
+<!--                    start_yeild: start_yeild,-->
+<!--                    end_yeild: end_yeild-->
+<!--                })-->
+<!--            });-->
+<!--            if (response.ok) {-->
+<!--                const data = await response.json();-->
+<!--                document.getElementById("message").textContent = data.message;-->
+<!--            }-->
+<!--            else-->
+<!--                console.log(response);-->
+<!--    }-->
+
+<!--</script>-->
+</body>
+</html>
