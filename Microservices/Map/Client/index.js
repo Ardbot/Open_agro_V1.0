@@ -67,6 +67,7 @@ function check_local_storage(key) {
 // setting Запрос настроек с сервера во время загрузки страницы.
 function get_setting() {
 request_api('POST', '/api/map/home')   // Стартовая точка
+//request_api('GET', '/api/map/home')   // Стартовая точка
 request_api('POST', '/api/map/fields')
 
 

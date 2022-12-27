@@ -3,7 +3,7 @@ import json
 
 import uvicorn
 
-# Старт uvicorn Microservices.Map.Server.Map:app --reload
+# Старт uvicorn Microservices.Map.Server.Map:app --reload --host=0.0.0.0
 
 from fastapi import FastAPI
 from starlette.responses import FileResponse
@@ -20,21 +20,28 @@ app.mount("/db", StaticFiles(directory="Microservices/Map/Client/layers"))
 def read_root():
     return {"Hello": "World"}
 
-@app.get("/api/map/{user_id}/home")
-async def map_home_point(user_id: int):
-    """ Запрос в БД. Стартовая точка пользователя"""
-    pass
-    return {"message": {'latlong': [50.253313, 127.8073497], 'zoom': 13}}
+@app.get("/api/map/{org_id}/home")
+async def map_home_point(org_id: int):
+    """ Запрос в БД. Стартовая точка организации"""
+    if org_id == 1:
+        return {"message": {'latlong': [50.0, 128], 'zoom': 11}}
+    elif org_id == 2:
+        return {"message": {'latlong': [51, 128], 'zoom': 12}}
 
-@app.get("/api/map/{user_id}/layers")
-async def return_files():
+@app.get("/api/map/{org_id}/layers")
+async def return_files(org_id: int):
     """ Возвращает список слоев """
     return {"layers": ["fields", "roads", "alias"]}
 
-@app.get("/api/map/{user_id}/fields")
+@app.get("/api/map/{org_id}/fields")
 async def return_files():
     """ Вернуть файл с полями"""
     return FileResponse("Microservices/Map/Client/layers/field.js")
 
+@app.get("/api/NFC")
+async def NFC():
+    """ NFC метки"""
+    return FileResponse("Microservices/Map/Client/NFC.html")
+
 if __name__ == "__main__":
-    uvicorn.run("Map:app", reload=True, port=5000, log_level="info")
+    uvicorn.run("Map:app", reload=True, host='0.0.0.0', port=8000, log_level="info")

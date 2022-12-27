@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <!-- Масштабирует под экран на мобильном устройстве -->
+  <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
+  <title>NFC Scaner</title>
+</head>
+<link rel="stylesheet" href="NFC.css" />
+
+<body>
+  <!-- Строка состояния -->
+  <div class="control">
+    <div id="status">Включите NFC и нажмите --></div>
+    <button id="scan_btn" onclick="start_scan()">Сканировать</button>
+  </div>
+
+  <!-- Работа с базой данных -->
+  <label style="text-align: center; color:azure;">Работа с БД</label>
+  <div id="info_nrf" class="output">
+    <label>БД</label>
+    <select id="nfc_id">
+      <option>1</option>
+    </select>
+    <div style="float: right;">
+      <button onclick="add_option()">Записать в БД</button>
+      <button onclick="add_id_LS('nfc_id')">База данных</button>
+    </div>
+    <div id="container">123</div>
+    <br>
+  </div>
+
+  <!-- Вывод в терминал -->
+  <label style="text-align: center; color:azure;">Терминал</label>
+  <div class="output">
+    <div class="terminal_nav">
+      <button onclick="clearlogs()">Очистить</button>
+    </div>
+
+    <pre id="log"></pre>
+  </div>
+
+
+
+  <script src="NFC.js"> </script>
+</body>
+
+</html>
