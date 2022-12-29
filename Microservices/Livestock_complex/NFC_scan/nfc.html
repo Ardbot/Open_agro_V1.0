@@ -10,30 +10,49 @@
 
 <body>
   <!-- Строка состояния -->
+  <label style="text-align: center; color:azure;">Статус</label>
   <div class="control">
     <div id="status">Включите NFC и нажмите --></div>
-    <button id="scan_btn" onclick="start_scan()">Сканировать</button>
+    <button onclick="start_scan()">Сканировать</button>
+    
+  </div>
+
+
+  <!-- Информация о метке -->
+  <label style="text-align: center; color:azure;">Информация о метке</label>
+  <div class="output">
+    <select id="list_id" , onfocus="Refresh('nfc_id', 'list_id')">
+      <option>Выберете номер</option>
+    </select>
+
+    <div>
+      <label>Номер</label> <label id="nfc_id">value</label><br>
+      <label>Номер</label> <label id="">value</label><br>
+      <label>Номер</label> <label>value</label><br>
+    </div>
+
+    <div class="block_button">
+      <button onclick="Refresh('nfc_id', 'list_id')">Обновить</button>
+      <button onclick="add_option()">Запрос</button>
+    </div>
+
   </div>
 
   <!-- Работа с базой данных -->
   <label style="text-align: center; color:azure;">Работа с БД</label>
-  <div id="info_nrf" class="output">
-    <label>БД</label>
-    <select id="nfc_id">
-      <option>1</option>
-    </select>
-    <div style="float: right;">
+  <div class="output">
+    <div class="block_button">
       <button onclick="add_option()">Записать в БД</button>
-      <button onclick="add_id_LS('nfc_id')">База данных</button>
+      <button onclick="clear_db()">Очистить БД</button>
+      <button onclick="add_LS('nfc_id', 'key_15', 'value_456564')">База данных</button>
     </div>
-    <div id="container">123</div>
     <br>
   </div>
 
   <!-- Вывод в терминал -->
   <label style="text-align: center; color:azure;">Терминал</label>
   <div class="output">
-    <div class="terminal_nav">
+    <div class="block_button">
       <button onclick="clearlogs()">Очистить</button>
     </div>
 

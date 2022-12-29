@@ -40,6 +40,11 @@ body {
   padding: 0.2em;
 }
 
+.block_button {
+  float: right;
+  padding: 3px;
+}
+
 #status {
   margin: .5em 0;
   font-style: italic;
