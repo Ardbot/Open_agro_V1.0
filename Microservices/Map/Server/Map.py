@@ -20,7 +20,7 @@ app.mount("/db", StaticFiles(directory="Microservices/Map/Client/layers"))
 def read_root():
     return {"Hello": "World"}
 
-@app.get("/api/map/{org_id}/home")
+@app.get("/api/map/home")
 async def map_home_point(org_id: int):
     """ Запрос в БД. Стартовая точка организации"""
     if org_id == 1:

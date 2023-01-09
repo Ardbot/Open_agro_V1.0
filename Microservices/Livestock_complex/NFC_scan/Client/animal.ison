@@ -1,0 +1,42 @@
+{
+    "nfc_id1": {
+        "card": {
+            "number": "100500",
+            "gender": "female",
+            "dob": 1654329940,
+            "breed": "red and white",
+            "parents": [
+                100,
+                500
+            ]
+        },
+        "veterinarian": {
+            "Вакцинация": "Протокол 1"
+        },
+        "zootechnics": {
+            "age_group": "Нетель",
+            "location": "Родилка"
+        }
+    },
+
+    "nfc_id2": {
+        "card": {
+            "number": "200700",
+            "gender": "female",
+            "dob": 1654321230,
+            "breed": "red and white",
+            "parents": [
+                200,
+                500
+            ]
+        },
+        "veterinarian": [
+            "Вакцинация. Протокол 2",
+            "Лечение мастита. Протокол 3"
+        ],
+        "zootechnics": {
+            "age_group": "Корова",
+            "location": "Родилка"
+        }
+    }
+}

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <!-- Масштабирует под экран на мобильном устройстве -->
+  <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
+  <title>NFC Scaner</title>
+</head>
+<link rel="stylesheet" href="NFC.css" />
+
+<body>
+  <!-- Строка состояния -->
+  <label style="text-align: center; color:azure;">Статус</label>
+  <div class="control">
+    <div id="status_nfc">Включите NFC и нажмите --></div>
+    <button class="scan_btn">Сканировать</button>
+
+  </div>
+
+
+  <div id="status" class="block">
+    <!-- <h4>Задание. Список</h4> -->
+    <div class="output">
+      <table>
+        <caption>Задание. Список</caption>
+        <tr>
+          <th>№</th>
+          <th>Местоположение</th>
+          <th>Вид работы</th>
+        </tr>
+        <tr id="list_work">
+
+        </tr>
+      </table>
+
+    </div>
+    <div class="block_button">
+      <button onclick="get_work()">Обновить</button>
+    </div>
+  </div>
+
+
+  <!-- Информация о метке -->
+  <div class="block">
+    <!-- <h4>Информация о метке: <label class="nfc_id">00:00:00:00</label></h4>s -->
+    <div class="output">
+      <table>
+        <caption>
+          Информация о животном <label class="number_animal ">00:00:00:00</label>
+        </caption>
+        <!-- <tr>
+          <th>Наименование</th>
+          <th>Значение</th>
+        </tr> -->
+        <tr>
+          <td>Метка животного</td>
+          <td class="nfc_id">-</td>
+        </tr>
+        <tr>
+          <td>Пол</td>
+          <td class="gender">-</td>
+        </tr>
+        <tr>
+          <td>Дата рождение</td>
+          <td class="dob_animal">-</td>
+        </tr>
+        <tr>
+          <td>Порода</td>
+          <td class="breed">-</td>
+        </tr>
+        <tr>
+          <td>Родители </td>
+          <td class="parents">-</td>
+        </tr>
+      </table>
+
+      <div class="block_button">
+        <!-- <button class="info_update_btn">Обновить</button> -->
+        <button class="info_read_btn">Считать</button>
+        <!-- <button class="info_record_btn">Записать</button> -->
+      </div>
+
+    </div>
+  </div>
+
+
+
+  <!-- Работа с базой данных -->
+  <!-- <div class="block">
+    <h4>Работа с БД</h4>
+    <div class="output">
+      <select id="list_id" , onfocus="Refresh('nfc_id', 'list_id')">
+        <option>Выберете номер</option>
+      </select>
+    </div>
+    <div class="block_button">
+      <button onclick="downloads_work()">Получить работу</button>
+      <button class="read_db_btn">Чтение</button>
+      <button class="write_db_btn">Запись</button>
+      <button id="add_buttom">Добавить</button>
+      <button class="clear_record_btn">Очистить запись</button>
+      <button class="clear_db_btn">Очистить БД</button>
+    </div>
+  </div> -->
+
+
+  <!-- Работа с метками -->
+  <div class="block">
+    <h4>Работа с метками</h4>
+    <div class="output">
+      <label class="id_teg"></label>
+      <label class="id_teg"></label>
+    </div>
+    <div class="block_button">
+      <button class="read_nfc_btn">Чтение</button>
+      <button class="write_nfc_btn">Запись</button>
+      <button class="clear_nfc_btn">Очистить</button>
+    </div>
+  </div>
+
+  <!-- Вывод в терминал -->
+  <!-- <div class="block">
+    <h4>Терминал</h4>
+    <div class="block_button">
+      <button onclick="clear()">Очистить</button>
+    </div>
+    <div class="output">
+      <pre id="log"></pre>
+    </div>
+  </div> -->
+
+
+
+
+  <!-- <script src="NFC.js"> </script> -->
+  <!-- <script src="https://ardbot.ru:8443/tools/local_DB.js" charset="utf-8"></script> -->
+  <script src="console.js"></script>
+  <script src="local_DB.js"></script>
+  <script src="animal.js"></script>
+  <script src="info_NFC.js"></script>
+
+
+  <!-- <script src="https://ardbot.ru:8443/tools/console.js" charset="utf-8"></script> -->
+
+
+
+  <script type="text/javascript" src="NFC.js?ver=12345"></script>
+</body>
+
+</html>
