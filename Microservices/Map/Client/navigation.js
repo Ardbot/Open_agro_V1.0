@@ -51,7 +51,7 @@ async function cars_list(data) {
 
 
 async function cars() {
-    let response = await fetch("/api/map/car_list");
+    let response = await fetch("/as/car_list");
     if (response.ok) { // если HTTP-статус в диапазоне 200-299
         // получаем тело ответа (см. про этот метод ниже)
         let cars = await response.json();

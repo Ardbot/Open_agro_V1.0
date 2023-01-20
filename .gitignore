@@ -1,2 +1,5 @@
 /venv/
 hardware/Config.h
+* pyc
+Microservices/__pycache__/__init__.cpython-310.pyc
+Microservices/__pycache__/FastApi.cpython-310.pyc
