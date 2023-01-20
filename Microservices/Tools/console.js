@@ -1,4 +1,4 @@
-// Консоль для разработки
+// Development Console
 
 var Console_log = {
     log: function () {
@@ -12,12 +12,14 @@ var Console_log = {
         document.querySelector('#log').textContent = "logs:\n";
       },
 }
+
 logs = Console_log;
 log = logs.log;
 
 console_log = document.createElement('div')
 console_log.style.background = "#414141";
 console_log.style.margin = "0.3em 0em";
+console_log.style.zIndex = "1000";
 
 button_clear = document.createElement("button");
 button_clear.style.float = "right";
