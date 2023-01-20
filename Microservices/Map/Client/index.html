@@ -1,35 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <title>Open_Agro</title>
 
     <!-- Грузим стили -->
-    <link rel="stylesheet" href="index.css"/>
-    <link rel="stylesheet" href="leaflet/leaflet.css"/>
+    <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="leaflet/leaflet.css" />
 
 </head>
-<body onload="get_setting()">
-<!--<body>-->
-<div id="menu" class="menu" display="flex">
-
-    <button onclick="home()">Домой</button>
+<div class="menu">
+    <button onclick="map_home_point()">Домой</button>
     <button onclick="get_setting()">Test button</button>
+    <button onclick="get_geo()">Где машина</button>
     <button onclick="get_field()">Поля</button>
     <label id="message"></label>
 
     <input id="key">key</input>
     <input id="val">val</input>
     <button onclick="set_localStorage('123','789')">Записать</button>
-
 </div>
-<div id="map" class="map" display="flex"></div>
+<div class="container">
+    <div id="map" class="map brd"></div>
+    <div id="right_column" class="right_column brd"><button class="refresh_list_cars">Обновить</button></div>
+</div>
+<div class="dev">Отладка</div>
 
-<!-- 2. Грузим скрипты -->
+<!-- 2. Грузим инструменты -->
 <script src="leaflet/leaflet.js"></script>
+
+<script src="https://ardbot.ru:8443/tools/console.js" charset="utf-8"></script>
+<script src="https://ardbot.ru:8443/tools/resp.js" charset="utf-8"></script>
+
+<!-- db = local_DB-->
+<script src="https://ardbot.ru:8443/tools/local_DB.js" charset="utf-8"></script>
+
 
 <!-- Главный скрипт -->
 <script src="index.js"></script>
+<script src="layers.js"></script>
+
+<!-- Грузим блоки -->
+<script src="navigation.js" charset="utf-8"></script>
 
 </body>
+
 </html>
