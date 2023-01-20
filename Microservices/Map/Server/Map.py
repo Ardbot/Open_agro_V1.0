@@ -1,6 +1,9 @@
 """ Микросервис "Карта" """
 from Microservices.FastApi import *
 
+# Считываем пароль с хранилища сервера
+apiKey = keyring.get_password("agrosignal", "apiKey")
+
 """ Каталог с картой """
 app.mount("/map", StaticFiles(directory="Microservices/map/client", html=True))
 # Имитация базы данных

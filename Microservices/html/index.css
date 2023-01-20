@@ -1,0 +1,54 @@
+html {
+    box-sizing: border-box;
+    margin: 0;
+    background: #282828;
+}
+
+body {
+    margin: 0;
+}
+
+
+    
+
+
+.menu {
+    height: 2vh;
+    padding: 4px;
+    background: #ff8800b9;
+}
+
+.brd{
+    border: 1px solid #eb8d00;
+}
+
+.container  {
+    display: flex;
+    flex-direction:row;
+    justify-content: space-between;
+    height: 97vh;
+    background: #ffffffbe;
+}
+
+.map {
+    flex-grow: 1;
+    height: 100%;
+    min-width: 20%;
+    min-height: 300px;
+}
+
+.right_column {
+    min-width: 14em;
+    background: #fff7e0;
+}
+
+.dev {
+    box-sizing: border-box;
+    position: absolute;
+    z-index: 1000;
+    bottom: 0;
+    left: 0;
+    padding: 4px;
+    width: 100%;
+    background: #eb8d00a1;
+}

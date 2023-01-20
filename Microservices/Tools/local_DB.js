@@ -1,30 +1,30 @@
-// Работает с 1 строкой
+// Works with 1 line in the browser
 class Local_DB {
 
   constructor(key_LS) {
     this.key_LS = key_LS
   }
-  // Чтение
+  // Reading
   read() {
     var LS = JSON.parse(localStorage.getItem(this.key_LS));
     // log(LS)
     return LS
   }
-  // Запись в память
+  // Memory write
   write(data) {
     localStorage.setItem(this.key_LS, JSON.stringify(data));
   }
-  // Добавить запись
+  // Add a note
   add_record() {
     log("В разработке")
   }
-  // Очистить запись
+  // Clear entry
   clear_record() {
     localStorage.setItem(this.key_LS, '{}');
   }
 }
 
-// Обращение к 1 строке в хранилище
+// Accessing the string "Local_Storage" in storage
 db = new Local_DB("Local_Storage")
 
 // Работа с локальной базой данных
@@ -122,20 +122,11 @@ db = new Local_DB("Local_Storage")
 // }
 
 
-
 // Обрабротка нажатий кнопок БД (выборка классов)
 document.querySelectorAll('.read_db_btn').forEach(el => el.addEventListener('click', () => { db.read() }));
 document.querySelectorAll('.write_db_btn').forEach(el => el.addEventListener('click', () => { db.write(Date.now()) }));
 document.querySelectorAll('.clear_record_btn').forEach(el => el.addEventListener('click', () => { db.clear_record() }));
 // document.querySelectorAll('.clear_db_btn').forEach(el => el.addEventListener('click', () => { db.clear_db() }));
-
-
-
-
-
-function test_db() {
-
-}
 
 
 // // Добавляем данные в локальную память. key_LS - ключ localStorage
