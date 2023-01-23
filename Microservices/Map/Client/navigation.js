@@ -7,20 +7,21 @@ map_home = new Local_DB("map_home");
 async function getHome() {
     let response = await fetch("/map/home");
     if (response.ok) { // если HTTP-статус в диапазоне 200-299
-        
         let home = await response.json();
-        map_home.write(home)    // [50, 128]
+        map_home.write(home)    // [50, 128]  
     } else {
-        log("Home err: " + response.status);
+        log("Home err: " + response.status + " " + response.text);
     }
 }
 
 // Кнопка "Домой"
 async function home() {
+    getHome();
     setView(map_home.read(), map_zoom.read())
 }
+document.querySelectorAll('.homeButton').forEach(el => el.addEventListener('click', () => { home() }));
 
-// Сохраняем текущее местоположение карты 
+// Сохраняем текущее местоположение карты
 map_centre = new Local_DB("map_centre");
 map.on("moveend", function () {
     map_centre.write(map.getCenter())
@@ -39,11 +40,11 @@ setView(map_centre.read(), map_zoom.read())
 var popup = L.popup();
 
 // var content = {"<button>Путь сюда</button>"}
-    
+
 
 
 // Отображает меню по правому клику
-function locationPopup(e, content="no_data") {
+function locationPopup(e, content = "no_data") {
     popup
         .setLatLng(e.latlng)
         .setContent(content)
@@ -53,5 +54,3 @@ function locationPopup(e, content="no_data") {
 map.on("contextmenu", locationPopup)
 // map.on("contextmenu", )
 
-// Отрисовка списка техники
-cars_list_db = new Local_DB("cars_list")

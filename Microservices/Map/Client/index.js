@@ -4,10 +4,6 @@ var map = L.map('map', {
   maxZoom: 18,
 }).setView([50,128], 10);
 
-// alert(map.getCenter())
-
-
-
 
 // // Контура полей (fields)
 // var field = L.geoJson(get_localStorage('/api/map/fields'), {

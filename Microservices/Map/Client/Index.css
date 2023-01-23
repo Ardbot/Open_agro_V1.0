@@ -23,7 +23,7 @@ body {
     display: flex;
     flex-direction:row;
     justify-content: space-between;
-    height: 90vh;
+    height: 80vh;
     background: #ffffffbe;
 }
 
@@ -36,6 +36,8 @@ body {
 
 .right_column {
     min-width: 4em;
+    max-width: 100%;
+    overflow: auto;
     background: #fff7e0;
 }
 

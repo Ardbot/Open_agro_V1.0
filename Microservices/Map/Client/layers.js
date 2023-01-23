@@ -14,8 +14,6 @@ var baseMaps = {
     // "Mapbox Streets": streets
 };
 
-
-
 var littleton = L.marker([50.02, 128]).bindPopup('This is Littleton, CO.'),
     denver    = L.marker([50.03, 128]).bindPopup('This is Denver, CO.'),
     aurora    = L.marker([50.04, 128]).bindPopup('This is Aurora, CO.'),

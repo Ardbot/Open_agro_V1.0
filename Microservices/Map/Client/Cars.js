@@ -1,11 +1,9 @@
 // Машины
 
-async function cars_list(data) {
-    cars_list_db.write(data)
-}
+cars_list_db = new Local_DB("cars_list")
 
 // Обновляет список машин в локальной памяти устройства
-async function cars() {
+async function getCars() {
     let response = await fetch("/cars/car_list");
     if (response.ok) { // если HTTP-статус в диапазоне 200-299
         // получаем тело ответа (см. про этот метод ниже)
@@ -17,18 +15,16 @@ async function cars() {
     }
 }
 
-
-// Выводим список в элемент
+// Отрисовка списка в элемент   *заменить на другой файл*
 async function cars_list() {
     cars = cars_list_db.read();
-    carss = document.getElementById("right_column")
-    log("Отрисовка ");
+    carsDiv = document.getElementById("right_column")
+    // headings(['id', "Номер"])
     for (car in cars) {
         car_li = document.createElement('li')
         car_li.textContent = JSON.stringify(cars[car])
-        carss.append(car_li)
-        // log(cars[car])
+        carsDiv.append(car_li)
     }
 }
 
-document.querySelectorAll('.refresh_list_cars').forEach(el => el.addEventListener('click', () => { cars() }));
+document.querySelectorAll('.refresh_list_cars').forEach(el => el.addEventListener('click', () => { cars_list() }));

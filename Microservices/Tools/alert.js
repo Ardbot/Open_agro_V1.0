@@ -8,4 +8,5 @@ document.body.append(div);
 setTimeout(() => div.remove(), time);
 }
 
+// document.querySelectorAll('.zzz').forEach(el => el.addEventListener('click', () => { msg() }));
 
