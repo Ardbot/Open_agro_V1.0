@@ -2,7 +2,7 @@
 <html lang="ru">
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
     <title>Open_Agro</title>
 
     <!-- Грузим стили -->
@@ -25,17 +25,23 @@
     <div id="map" class="map brd"></div>
     <div id="right_column" class="right_column brd"><button class="refresh_list_cars">Обновить</button></div>
 </div>
-<div class="dev">Отладка</div>
+<div id="log">Статус</div>
 
 <!-- 2. Грузим инструменты -->
 <script src="leaflet/leaflet.js"></script>
 
-<script src="https://ardbot.ru:8443/tools/console.js" charset="utf-8"></script>
-<script src="https://ardbot.ru:8443/tools/resp.js" charset="utf-8"></script>
+<!-- Консоль -->
+<link rel="stylesheet" href="/tools/console/console.css" />
+<script src="/tools/console/console.js" charset="utf-8"></script>
 
-<!-- db = local_DB-->
-<script src="https://ardbot.ru:8443/tools/local_DB.js" charset="utf-8"></script>
+<!-- Работа с локальным хранилищем -->
+<script src="/tools/local_DB.js" charset="utf-8"></script>
 
+<!-- Геопозиция -->
+<script src="/tools/geoPosition.js" charset="utf-8"></script>
+
+<!-- Всплывающие уведомления -->
+<script src="/tools/alert.js" charset="utf-8"></script>
 
 <!-- Главный скрипт -->
 <script src="index.js"></script>

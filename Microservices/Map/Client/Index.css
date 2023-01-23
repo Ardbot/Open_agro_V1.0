@@ -10,7 +10,7 @@ body {
 
 
 .menu {
-    height: 2vh;
+    height: 3vh;
     padding: 4px;
     background: #ff8800b9;
 }
@@ -35,7 +35,7 @@ body {
 }
 
 .right_column {
-    min-width: 14em;
+    min-width: 4em;
     background: #fff7e0;
 }
 
@@ -49,3 +49,13 @@ body {
     width: 100%;
     background: #eb8d00a1;
 }
+
+.alert {
+    position: absolute;
+    top: 50px;
+    padding: 15px;
+    border: 1px solid #d6e9c6;
+    border-radius: 4px;
+    color: #3c763d;
+    background-color: #dff0d8;
+  }
