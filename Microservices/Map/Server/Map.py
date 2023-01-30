@@ -7,12 +7,9 @@ tags = ['map']
 )
 
 @map_router.get("/home")
-async def map_home_point(org_id: int):
+async def map_home_point():
     """ Запрос в БД. Стартовая точка организации"""
-    if org_id == 1:
-        return {"message": {'latlong': [50.0, 128], 'zoom': 11}}
-    elif org_id == 2:
-        return {"message": {'latlong': [51, 128], 'zoom': 12}}
+    return [50.0, 128]
 
 @map_router.get("/layers")
 async def return_layers():

@@ -11,12 +11,13 @@
 
 </head>
 <div class="menu">
-    <button onclick="map_home_point()">Домой</button>
-    <button onclick="get_setting()">Test button</button>
+    <button class="homeButton">Домой</button>
     <button onclick="get_geo()">Где машина</button>
     <button onclick="get_field()">Поля</button>
     <button class="createTable">Создать таблицу</button>
 
+    <label id="message"></label>
+    <label class="userId">userId</label>
 </div>
 <div class="container">
     <div id="map" class="map brd"></div>
@@ -35,10 +36,30 @@
 <!-- 2. Грузим инструменты -->
 <script src="leaflet/leaflet.js"></script>
 
-<script src="/tools/geoPosition.js" charset="utf-8"></script>
-<script src="/tools/resp.js" charset="utf-8"></script>
+<!-- Консоль -->
+<link rel="stylesheet" href="/tools/console/console.css" />
+<script src="/tools/console/console.js" charset="utf-8"></script>
 
+<!-- Работа с локальным хранилищем -->
 <script src="/tools/local_DB.js" charset="utf-8"></script>
+
+<!-- Геопозиция -->
+<script src="/tools/geoPosition.js" charset="utf-8"></script>
+
+<!-- Создание таблиц -->
+<link rel="stylesheet" href="/tools/createTable/createTable.css" /> 
+<script src="/tools/createTable/createTable.js" charset="utf-8"></script>
+
+<!-- Всплывающие уведомления -->
+<script src="/tools/alert.js" charset="utf-8"></script>
+
+<!-- Основные элементы -->
+<link rel="stylesheet" href="users.css" /> 
+<script src="users.js" charset="utf-8"></script>
+<script src="cars.js" charset="utf-8"></script>
+
+<!-- Websocket -->
+<script src="/tools/webSocket.js" charset="utf-8"></script>
 
 <!-- Создание таблиц -->
 <link rel="stylesheet" href="/tools/createTable/createTable.css" />

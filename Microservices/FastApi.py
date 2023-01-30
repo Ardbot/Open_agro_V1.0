@@ -24,6 +24,7 @@ from starlette.staticfiles import StaticFiles
 from Microservices.map.server.Map import map_router
 from Microservices.RFID.server.RFID_server import map_nfc
 from Microservices.agrosignal.agrosignal import as_router
+from Microservices.map.server.users import user_router
 app = FastAPI()
 
 # Главная страница
@@ -34,16 +35,27 @@ def root():
 
 """ Каталоги приложений """
 
-# Роутеры карты 
+# Папка с инструментами/ плагинами 
+app.mount("/tools", StaticFiles(directory="Microservices\\tools", html=True))
+
+# Пользователи
+app.include_router(user_router)
+
+# Машины
+
+
+# Карта
 app.include_router(map_router)
 app.mount("/map", StaticFiles(directory="Microservices\map\client", html=True))
 
-# Роутеры RFID
+# RFID
 app.include_router(map_nfc)
 app.mount("/nfc", StaticFiles(directory="Microservices\RFID\client", html=True))
 
-# Роутеры Агросигнал
+# Агросигнал
 app.include_router(as_router)
-# app.mount("/as", StaticFiles(directory="Microservices\RFID\client", html=True))
+
+
+
 
 app.mount("/tools", StaticFiles(directory="Microservices\\tools", html=True))

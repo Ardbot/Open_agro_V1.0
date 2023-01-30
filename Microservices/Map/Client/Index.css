@@ -29,7 +29,7 @@ body {
     display: flex;
     flex-direction:row;
     justify-content: space-between;
-    height: 90vh;
+    height: 80vh;
     background: #ffffffbe;
 }
 
@@ -41,7 +41,8 @@ body {
 }
 
 .right_column {
-    min-width: 2em;
+    min-width: 4em;
+    max-width: 100%;
     overflow: auto;
     background: #fff7e0;
 }
@@ -53,5 +54,15 @@ body {
     left: 0;
     padding: 4px;
     width: 100%;
-    background:#ff8800b9;
+    background: #eb8d00a1;
 }
+
+.alert {
+    position: absolute;
+    top: 50px;
+    padding: 15px;
+    border: 1px solid #d6e9c6;
+    border-radius: 4px;
+    color: #3c763d;
+    background-color: #dff0d8;
+  }
