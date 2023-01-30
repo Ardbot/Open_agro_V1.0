@@ -46,4 +46,4 @@ app.mount("/nfc", StaticFiles(directory="Microservices\RFID\client", html=True))
 app.include_router(as_router)
 # app.mount("/as", StaticFiles(directory="Microservices\RFID\client", html=True))
 
-
+app.mount("/tools", StaticFiles(directory="Microservices\\tools", html=True))

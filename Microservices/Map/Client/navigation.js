@@ -49,7 +49,6 @@ async function cars_list(data) {
 }
 
 
-
 async function cars() {
     let response = await fetch("/as/car_list");
     if (response.ok) { // если HTTP-статус в диапазоне 200-299
@@ -62,21 +61,20 @@ async function cars() {
     }
 }
 
-
 // Выводим список в элемент
 async function cars_list() {
     cars = cars_list_db.read();
-    carss = document.getElementById("right_column")
-    log("Отрисовка ");
+    createTable("right_column");
+    headings(["id", "Номер"]);
     for (car in cars) {
-        car_li = document.createElement('li')
-        car_li.textContent = JSON.stringify(cars[car])
-        carss.append(car_li)
-        // log(cars[car])
+        // num = car;
+        idCar = Object.keys(cars[car]);
+        gos =  Object.values(cars[car]);
+        body([idCar, gos])
     }
 }
 
-document.querySelectorAll('.refresh_list_cars').forEach(el => el.addEventListener('click', () => { cars() }));
+document.querySelectorAll('.createTable').forEach(el => el.addEventListener('click', () => { cars_list() }));
 
 
 
