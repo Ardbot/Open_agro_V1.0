@@ -27,4 +27,6 @@ async function cars_list() {
     }
 }
 
+
+
 document.querySelectorAll('.refresh_list_cars').forEach(el => el.addEventListener('click', () => { cars_list() }));
