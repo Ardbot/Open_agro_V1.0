@@ -5,18 +5,7 @@ html {
     background: #282828;
 }
 
-body {
-    margin: 0;
-}
-
-
 .menu {
-    position: fixed;
-    /* float: left; */
-    z-index: 1000;
-    width: 100%;
-    min-height: 1.5em;
-    height: 1em;
     padding: 4px;
     background: #ff8800b9;
 }
@@ -43,7 +32,7 @@ body {
 .right_column {
     min-width: 4em;
     max-width: 100%;
-    overflow: auto;
+    overflow:auto;
     background: #fff7e0;
 }
 
