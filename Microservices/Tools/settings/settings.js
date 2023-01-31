@@ -1,10 +1,6 @@
-// Настройки пользователя
 
 // Добавляем кнопку в блок меню
-user = document.createElement("label");
-
-menu.append(user);
-// Добавляем кнопку в блок меню
+menu = document.getElementById("settings")
 settingsBtn = document.createElement("button");
 settingsBtn.classList = "settingsBtn";
 settingsBtn.textContent = "Настройки";

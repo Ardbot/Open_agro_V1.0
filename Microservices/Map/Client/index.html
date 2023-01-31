@@ -20,7 +20,11 @@
 </div>
 <div class="container">
     <div id="map" class="map brd"></div>
-    <div id="menu" class="menu brd"></div>
+    <div id="menu" class="menu brd">
+        <div id="user"></div>
+        <div id="geoPos"></div>
+        <div id="settings"></div>
+    </div>
 </div>
 
 
@@ -29,9 +33,8 @@
 <!-- <link rel="stylesheet" href="/tools/console/console.css" /> -->
 <!-- <script src="/menu.js" charset="utf-8"></script> -->
 
-Microservices\tools\users\settings.js
-<link rel="stylesheet" href="/tools/console/console.css"/>
-<script src="/tools/users/settings.js" charset="utf-8"></script>
+
+
 
 
 <!-- 2. Грузим инструменты -->
@@ -42,11 +45,12 @@ Microservices\tools\users\settings.js
 <link rel="stylesheet" href="/tools/console/console.css" />
 <script src="/tools/console/console.js" charset="utf-8"></script>
 
-<!-- Информация о приложении -->
-<!-- <div class="status">Статус</div> -->
-
 <!-- Работа с локальным хранилищем -->
 <script src="/tools/local_DB.js" charset="utf-8"></script>
+
+<!-- Пользователь -->
+<link rel="stylesheet" href="/tools/users/users.css"/>
+<script src="/tools/users/users.js" charset="utf-8"></script>
 
 <!-- Геопозиция -->
 <script src="/tools/geoPosition.js" charset="utf-8"></script>

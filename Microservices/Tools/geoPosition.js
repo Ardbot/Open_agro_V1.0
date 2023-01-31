@@ -36,10 +36,11 @@ function getPosition(position) {
     return lat, long, accuracy
 }
 
-
+// Ищем элемент с id "user" на странице.
+geoPos = document.getElementById('geoPos');
 geoBtn = document.createElement("button");
 geoBtn.classList = "geoBtn";
-geoBtn.textContent = "Мое местоположение";
-menu.append(geoBtn);
+geoBtn.textContent = "Моё местоположение";
+geoPos.append(geoBtn);
 
 document.querySelectorAll('.geoBtn').forEach(el => el.addEventListener('click', () => { enabledGeoPosition() }));
