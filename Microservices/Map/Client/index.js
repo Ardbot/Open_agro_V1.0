@@ -29,3 +29,6 @@ var map = L.map('map', {
 function setView(start_point = [50, 128], zoom = 10) {
   map.setView(start_point, zoom)
 }
+
+// Элементы окна
+menu = document.getElementById("menu")

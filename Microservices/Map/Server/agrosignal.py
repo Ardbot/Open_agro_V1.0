@@ -8,3 +8,4 @@ import keyring
 # Считываем пароль с хранилища сервера
 apiKey = keyring.get_password("agrosignal", "apiKey")
 
+# Websocket

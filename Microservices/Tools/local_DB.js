@@ -4,6 +4,12 @@ class Local_DB {
   constructor(key_LS) {
     this.key_LS = key_LS
   }
+
+  // setKeyLS(newName) {
+  //   this.key_LS = newName;
+  //   console.log(this.key_LS)
+  // }
+
   // Reading
   read() {
     var LS = JSON.parse(localStorage.getItem(this.key_LS));
@@ -26,6 +32,41 @@ class Local_DB {
 
 // Accessing the string "Local_Storage" in storage
 db = new Local_DB("Local_Storage")
+
+// Элемент для занесения ключа
+// DivLS = document.getElementById('DivLS');
+
+// topDiv = document.getElementById('DivLS');
+// scanLSbtn = document.createElement('button');
+// scanLSbtn.textContent = "Сканировать LS"
+// topDiv.append(scanLSbtn);
+// DivLS.append(topDiv);
+
+// bodyDiv = document.createElement('button');
+
+// keyInactive = document.createElement('label');
+// keyInactive.innerText = "key";
+
+// key = document.createElement('input');
+// key.placeholder = "key"
+
+// val = document.createElement('input');
+// val.placeholder = "value";
+
+// {/* <label>Click me <input type="text"></label> */}
+
+
+// addBtn = document.createElement('button');
+// addBtn.textContent = "Сохранить"
+
+// delBtn = document.createElement('button');
+// delBtn.textContent = "Удалить запись"
+
+// DivLS.append(keyInactive);
+// DivLS.append(val);
+// DivLS.append(addBtn);
+// DivLS.append(delBtn);
+
 
 // Работа с локальной базой данных
 // var Local_DB = {

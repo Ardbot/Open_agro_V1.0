@@ -1,0 +1,17 @@
+/* Стиль окна настроек */
+
+.settingsBtn {
+    position: fixed;
+    top: 1em;
+    right: 1em;
+    /* float: right; */
+}
+
+.settingsDiv {
+    position: fixed;
+    top: 50px;
+    width: 100%;
+    padding: 0.5em;
+    z-index: 1000;
+    background: #dddddd;
+}
