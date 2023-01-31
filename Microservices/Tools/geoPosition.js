@@ -38,7 +38,7 @@ function getPosition(position) {
 
 
 geoBtn = document.createElement("button");
-settingsBtn.classList = "geoBtn";
+geoBtn.classList = "geoBtn";
 geoBtn.textContent = "Мое местоположение";
 menu.append(geoBtn);
 
