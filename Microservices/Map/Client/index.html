@@ -21,7 +21,7 @@
 <div class="container">
     <div id="map" class="map brd"></div>
     <div id="menu" class="menu brd">
-        <div id="user"></div>
+        <div id="user" class=""></div>  
         <div id="geoPos"></div>
         <div id="settings"></div>
     </div>
@@ -32,9 +32,6 @@
 <!-- Microservices\map\client\menu.js -->
 <!-- <link rel="stylesheet" href="/tools/console/console.css" /> -->
 <!-- <script src="/menu.js" charset="utf-8"></script> -->
-
-
-
 
 
 <!-- 2. Грузим инструменты -->
@@ -48,12 +45,22 @@
 <!-- Работа с локальным хранилищем -->
 <script src="/tools/local_DB.js" charset="utf-8"></script>
 
+
+<!-- Модули -->
+<script type="module" src="user.js"></script>
+<script type="module" src="hello.js"></script>
+<script type="module" src="/tools/geoPositionClass.js"></script>
+
+
+<!-- Geo -->
+<!-- <script src="/tools/geoPositionClass.js" charset="utf-8"></script>  -->
+
 <!-- Пользователь -->
-<link rel="stylesheet" href="/tools/users/users.css"/>
+<link rel="stylesheet" href="/tools/users/users.css"/>  
 <script src="/tools/users/users.js" charset="utf-8"></script>
 
 <!-- Геопозиция -->
-<script src="/tools/geoPosition.js" charset="utf-8"></script>
+<!-- <script src="/tools/geoPosition.js" charset="utf-8"></script> -->
 
 <!-- Всплывающие уведомления -->
 <script src="/tools/alert.js" charset="utf-8"></script>

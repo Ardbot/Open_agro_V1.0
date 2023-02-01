@@ -2,18 +2,27 @@
 if (!navigator.geolocation) {
     alert("Устройство не поддерживает геопозицию!")
 } else {
-
 }
 
+// Обращаемся к геолокации устройства
 function geoPosition() {
-    navigator.geolocation.getCurrentPosition(getPosition,
-        error => log(error.message),
+    navigator.geolocation.getCurrentPosition((position) => {
+        var lat = position.coords.latitude
+        var long = position.coords.longitude
+        var accuracy = position.coords.accuracy
+        console.log(lat, long, accuracy)
+        return lat, long, accuracy
+    },
+        error => console.log(error.message),
         { enableHighAccuracy: true })
 }
 
+
 var marker, circle;
 
-function getPosition(position) {
+// Отрисовка на карте 
+function getPosition() {
+    log(position)
     var lat = position.coords.latitude
     var long = position.coords.longitude
     var accuracy = position.coords.accuracy

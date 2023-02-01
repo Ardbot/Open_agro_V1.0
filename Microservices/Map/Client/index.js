@@ -29,3 +29,14 @@ var map = L.map('map', {
 function setView(start_point = [50, 128], zoom = 10) {
   map.setView(start_point, zoom)
 }
+
+// import {user} from 'user.js';
+// import `./alert.js`;
+// console.log(user)
+// My position
+if (!navigator.geolocation) {
+  alert("Устройство не поддерживает геопозицию!")
+} else {
+  // console.log("geoPosition");
+  // console.log(geoPosition());
+}
