@@ -1,13 +1,11 @@
 // My position
-// if (!navigator.geolocation) {
-//     alert("Устройство не поддерживает геопозицию!")
-// } else {
-//     setInterval(() => {
-//         enabledGeoPosition();
-//     }, 5000);
-// }
+if (!navigator.geolocation) {
+    alert("Устройство не поддерживает геопозицию!")
+} else {
 
-function enabledGeoPosition() {
+}
+
+function geoPosition() {
     navigator.geolocation.getCurrentPosition(getPosition,
         error => log(error.message),
         { enableHighAccuracy: true })
@@ -23,7 +21,6 @@ function getPosition(position) {
     if (marker) {
         map.removeLayer(marker)
     }
-
     if (circle) {
         map.removeLayer(circle)
     }
@@ -40,7 +37,33 @@ function getPosition(position) {
 geoPos = document.getElementById('geoPos');
 geoBtn = document.createElement("button");
 geoBtn.classList = "geoBtn";
-geoBtn.textContent = "Моё местоположение";
+geoBtn.textContent = "🧭 Где я?";
 geoPos.append(geoBtn);
 
-document.querySelectorAll('.geoBtn').forEach(el => el.addEventListener('click', () => { enabledGeoPosition() }));
+
+document.querySelectorAll('.geoBtn').forEach(el => el.addEventListener('click', () => { geoPosition() }));
+
+// Отслеживание местоположения
+geoLabel = document.createElement("label");
+geoLabel.innerHTML = "🔍 Отслеживать"
+checkbox = document.createElement("input");
+checkbox.type = "checkbox";
+checkbox.classList = "geoCheckbox";
+geoLabel.append(checkbox);
+geoPos.append(geoLabel);
+
+
+
+function geoCheckbox() {
+    if (checkbox.checked) {
+        log("Навигация включена")
+        setInterval(() => {
+            geoPosition();
+        }, 5000);
+    }
+    else {
+        log("Навигация отключена")
+    }
+}
+
+document.querySelectorAll('.geoCheckbox').forEach(el => el.addEventListener('click', () => { geoCheckbox() }));
