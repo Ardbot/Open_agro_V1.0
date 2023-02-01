@@ -1,16 +1,16 @@
 /* Оформление для console. Author: Ardbot */
 
 .log {
+    bottom: 0;
     margin: 0.3em 0em;
     min-width: 200px;
     z-index: 1000;
     background: #414141;
 }
 
-.logButton {
-    float: right;
-    float: top;
-}
+/* .logButton {
+    opacity: 50%;
+} */
 
 .logOutput{
     background: #f0f0f0;

@@ -1,5 +1,5 @@
 """ Микросервис "Карта" """
-from Microservices.FastApi import *
+from FastApi import *
 
 map_router = APIRouter( 
 prefix='/map', 

@@ -1,6 +1,6 @@
 # Взаимодействие с Агросигнал
 
-from Microservices.FastApi import *
+from FastApi import *
 
 as_router = APIRouter( 
 prefix='/as', 

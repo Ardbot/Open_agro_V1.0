@@ -1,6 +1,6 @@
 # Пользователи системы
 
-from Microservices.FastApi import *
+from FastApi import *
 
 user_router = APIRouter( 
 prefix='/users', 

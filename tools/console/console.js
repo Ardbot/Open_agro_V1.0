@@ -22,7 +22,7 @@ console_log.classList = "log";
 
 button_clear = document.createElement("button");
 button_clear.classList = "logButton";
-button_clear.textContent = "Очистить";
+button_clear.textContent = "🧹";
 // button_clear.addEventListener('click', Console_log.clearLog);
 button_clear.addEventListener('click', logs.clearLog);
 console_log.append(button_clear);
