@@ -1,5 +1,22 @@
 /* Стиль окна настроек */
+body{
+    color: aliceblue;
+    background: #272727;
+}
 
+
+.settingsContainer {
+    color:black;
+    margin: 0.5em;
+    padding: 0.1em;
+    background: #dddddd;
+
+}
+
+.tr {
+    padding: 0.1em;
+    background: #941616;
+}
 .settingsBtn {
     position: fixed;
     top: 1em;

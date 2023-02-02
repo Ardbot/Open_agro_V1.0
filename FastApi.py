@@ -36,7 +36,7 @@ def root():
 """ Каталоги приложений """
 
 # Папка с инструментами/ плагинами 
-app.mount("/tools", StaticFiles(directory="tools")) 
+app.mount("/tools", StaticFiles(directory="tools", html=True)) 
 
 # Пользователи
 app.include_router(user_router)

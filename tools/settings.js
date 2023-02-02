@@ -1,10 +1,10 @@
 
-// Добавляем кнопку в блок меню
-menu = document.getElementById("settings")
-settingsBtn = document.createElement("button");
-settingsBtn.classList = "settingsBtn";
-settingsBtn.textContent = "Настройки";
-menu.append(settingsBtn);
+// // Добавляем кнопку в блок меню
+// menu = document.getElementById("settings")
+// settingsBtn = document.createElement("button");
+// settingsBtn.classList = "settingsBtn";
+// settingsBtn.textContent = "Настройки";
+// menu.append(settingsBtn);
 
 function showHide(element_id) {
     //Если элемент с id-шником element_id существует

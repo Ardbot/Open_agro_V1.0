@@ -5,10 +5,10 @@ class Local_DB {
     this.key_LS = key_LS
   }
 
-  // setKeyLS(newName) {
-  //   this.key_LS = newName;
-  //   console.log(this.key_LS)
-  // }
+  setKeyLS(newName) {
+    this.key_LS = newName;
+    console.log(this.key_LS)
+  }
 
   // Reading
   read() {
@@ -34,13 +34,46 @@ class Local_DB {
 db = new Local_DB("Local_Storage")
 
 // Элемент для занесения ключа
-// DivLS = document.getElementById('DivLS');
+DivLS = document.getElementById('DivLS');
+trDiv = document.createElement('DivLS');
+trDiv.classList = "tr"  // tr - table row
+DivLS.append(trDiv);
 
-// topDiv = document.getElementById('DivLS');
-// scanLSbtn = document.createElement('button');
-// scanLSbtn.textContent = "Сканировать LS"
-// topDiv.append(scanLSbtn);
-// DivLS.append(topDiv);
+keyInput = document.createElement('input');
+keyInput.placeholder = "key";
+valInput = document.createElement('input');
+valInput.placeholder = "value";
+
+
+writeLSbtn = document.createElement('button');
+writeLSbtn.classList = "writeLSbtn"
+writeLSbtn.textContent = "Сохранить"
+trDiv.append(keyInput, valInput, writeLSbtn);
+
+function setData() {
+  key = keyInput.value
+  if (key == "") {
+    alert("key: пусто!");
+  }
+  else {
+    db.setKeyLS(key);
+  }
+
+  val = valInput.value
+  if (val == "") {
+    alert("val: пусто!")
+  }
+  else {
+    db.write(val);
+  }
+
+  alert(db.read())
+
+
+
+}
+
+document.querySelectorAll('.writeLSbtn').forEach(el => el.addEventListener('click', () => { setData() }));
 
 // bodyDiv = document.createElement('button');
 
