@@ -5,69 +5,97 @@ let apiKey = localStorage.getItem('apiKey').slice(1, -1)
 log(apiKey)
 let socket = new WebSocket("wss://gis.agrosignal.com/data/play?apiKey=" + apiKey);
 
-// msg = '{"event":"start","cid": "5c849875b7","data":{"from":"2023-02-01T15:00:00.000Z","dynamic":[],"archiveFrom":null,"cid": "5c8498d0bf75b7"}}'
-
-
-
-
 socket.onopen = function (e) {
-    // Выполняем рукопожатие
 
 };
 
 socket.onmessage = function (event) {
-    // console.log(event.data)
-    parseWS(event.data);
+    // log(typeof (event))
+    // log(event.data)
+    // Обрабатываем ответ
+    parseWSagrosignal(event.data);
+
 };
 
 socket.onclose = function (event) {
     if (event.wasClean) {
-        alert(`[close] Соединение закрыто чисто, код=${event.code} причина=${event.reason}`);
+        alert(`[close] Соединение закрыто чисто, код: ${event.code} причина=${event.reason}`);
     } else {
         // например, сервер убил процесс или сеть недоступна
         // обычно в этом случае event.code 1006
-        alert('[close] Соединение прервано');
+        alert(`[close] Соединение прервано. Код: ${event.code}`);
     }
 };
 
 socket.onerror = function (error) {
-    alert(`[error]`);
+    alert(`[error]`, error);
 };
 
 
-function parseWS(data) {
-    ws = JSON.parse(data);
+// dataAS = { "event": "changes", "data": { "time": 1677715200900, "items": [{ "id": 121253, "time": 1675380523000, "last": 1675380523000, "values": { "rt_time": 1675380523000, "rt_position": [127.50855, 50.2895125] } }, { "id": 121245, "time": 1675380397000, "last": 1675380397000, "values": { "rt_time": 1675380397000, "rt_position": [127.74067, 50.183020000000006] } }, { "id": 121138, "time": 1675380525000, "last": 1675380525000, "values": { "rt_time": 1675380525000, "rt_position": [127.76482333333334, 50.25517333333334] } }, { "id": 121270, "time": 1675380528000, "last": 1675380528000, "values": { "rt_time": 1675380528000, "rt_position": [127.76603916666667, 50.2479125] } }] } }
+// log(typeof(dataAS.event))
+// Парсим данные с Агросигнала
+
+
+// Массив маркеров
+carMarker = {};
+carMarker.markers = [];
+carMarker.popup = [];
+
+var markerGroup = L.featureGroup();
+
+function parseWSagrosignal(dataAS) {
+    ws = JSON.parse(dataAS);
+    // ws = dataAS;
+    // console.log(dataAS);
+    // Блок с данными
     if (ws?.event == "changes") {
         items = ws.data.items;
-        // console.log(items)
         for (id in items) {
-            var marker1, circle1
+            let asId = items[id].id;
+            let asTime = items[id].time;
+            let asLast = items[id].last;
+            let asValues = items[id].values;
+            // log(asId, asTime, asLast, asValues)
 
-            var popup1 = L.popup();
-            position = items[id]?.values?.position
+            // Обработка местоположения
+            let position = asValues?.position
             if (position != undefined) {
-
                 lat = position[1]
                 long = position[0]
-                log(lat, long)
 
-                marker = L.marker([lat, long])
-                console.log(items[id].id)
-                popup1
-                    .setLatLng([lat, long])
-                    .setContent(String(items[id]?.id));
-                // circle = L.circle([lat, long], 10)
-                var featureGroup = L.featureGroup([marker, popup1]).addTo(map);
+                
+                data = {};
+                carMarker.markers.push([carMarker.markers[asId] = asId, [lat, long]]);
             }
-        }
-    }
+            // Позиция
+            // Задания
 
+            // position = items[id]?.values?.position
+        }
+
+        // 
+        // addMarker();
+
+        for (car in carMarker.markers){
+            // addMarker();
+            console.log(carMarker.markers[car]);
+        }
+
+
+        // console.log(carMarker.markers);
+        
+    }
+    // Блок с "рукопожатием"
     else if (ws?.event == "youAre") {
+        console.log("Авторизация");
+        var now = new Date().toISOString();
+        log(now)
         msg = {
             "event": "start",
             "cid": ws.data.id,
             "data": {
-                "from": "2023-03-02T00:00:00.900Z",
+                "from": now,
                 "dynamic": [],
                 "archiveFrom": null,
                 "cid": ws.data.id
@@ -75,4 +103,75 @@ function parseWS(data) {
         }
         socket.send(JSON.stringify(msg));
     }
+    else console.log("Не распознано")
 }
+
+// Список маркеров
+// var carMarker = [];
+var popup1 = L.popup();
+// Добавить маркер
+function addMarker([lat, long], carNum = '0') {
+
+    // Создаем маркер
+    marker = L.marker([lat, long], { title: carNum });
+    // markerGroup  Добавить 
+    // Всплывающее окно
+    // var popup = L.popup()
+    //     .setLatLng([lat, long])
+    //     .setContent(String(carNum));
+
+    // Добавляем в список
+    // key = carNum;
+
+    // title = marker.options.title;
+    // lat = marker._latlng.lat;
+    // long = marker._latlng.lng;
+
+    // data = {
+    //     title,
+    //     lat,
+    //     long
+    // }
+
+    // carMarker[key] = data;
+    // console.log(carMarker);
+
+    var featureGroup = L.featureGroup([markers]).addTo(map);
+
+}
+
+
+// Отрисовка маркеров
+function markerDrawing(carMarker) {
+
+}
+
+// Удаление маркеров
+function markerDelete(markerId) {
+
+}
+
+
+// var popup1 = L.popup();
+// var marker1, circle1
+
+// if (position != undefined) {
+
+//     lat = position[1]
+//     long = position[0]
+//     log(lat, long)
+
+//     marker = L.marker([lat, long])
+//     // console.log(items[id].id)
+//     popup1
+//         .setLatLng([lat, long])
+//         .setContent(String(items[id]?.id));
+//     // circle = L.circle([lat, long], 10)
+//     var featureGroup = L.featureGroup([marker, popup1]).addTo(map);
+// }
+
+// парсить
+document.querySelectorAll('.parseWS').forEach(el => el.addEventListener('click', () => { parseWSagrosignal(dataAS) }));
+document.querySelectorAll('.addMarker').forEach(el => el.addEventListener('click', () => { addMarker([50.01, 128]) }));
+// document.querySelectorAll('.markerDrawing').forEach(el => el.addEventListener('click', () => { markerDrawing() }));
+document.querySelectorAll('.markerDelete').forEach(el => el.addEventListener('click', () => { markerDelete() }));
