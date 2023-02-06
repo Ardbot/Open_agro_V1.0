@@ -3,7 +3,7 @@
 
 let apiKey = localStorage.getItem('apiKey').slice(1, -1)
 log(apiKey)
-let socket = new WebSocket("wss://gis.agrosignal.com/data/play?apiKey=" + apiKey);
+// let socket = new WebSocket("wss://gis.agrosignal.com/data/play?apiKey=" + apiKey);
 
 socket.onopen = function (e) {
 
@@ -37,13 +37,6 @@ socket.onerror = function (error) {
 // Парсим данные с Агросигнала
 
 
-// Массив маркеров
-carMarker = {};
-carMarker.markers = [];
-carMarker.popup = [];
-
-var markerGroup = L.featureGroup();
-
 function parseWSagrosignal(dataAS) {
     ws = JSON.parse(dataAS);
     // ws = dataAS;
@@ -64,9 +57,9 @@ function parseWSagrosignal(dataAS) {
                 lat = position[1]
                 long = position[0]
 
-                
-                data = {};
-                carMarker.markers.push([carMarker.markers[asId] = asId, [lat, long]]);
+                addMarker(carNum = String(asId), [lat, long])
+                // data = {};
+                // carMarker.markers.push([carMarker.markers[asId] = asId, [lat, long]]);
             }
             // Позиция
             // Задания
@@ -77,14 +70,14 @@ function parseWSagrosignal(dataAS) {
         // 
         // addMarker();
 
-        for (car in carMarker.markers){
-            // addMarker();
-            console.log(carMarker.markers[car]);
-        }
+        // for (car in carMarker.markers) {
+        //     // addMarker();
+        //     console.log(carMarker.markers[car]);
+        // }
 
 
         // console.log(carMarker.markers);
-        
+
     }
     // Блок с "рукопожатием"
     else if (ws?.event == "youAre") {
@@ -108,48 +101,47 @@ function parseWSagrosignal(dataAS) {
 
 // Список маркеров
 // var carMarker = [];
-var popup1 = L.popup();
+// var popup1 = L.popup();
 // Добавить маркер
-function addMarker([lat, long], carNum = '0') {
+// function addMarker([lat, long], carNum = '0') {
 
-    // Создаем маркер
-    marker = L.marker([lat, long], { title: carNum });
-    // markerGroup  Добавить 
-    // Всплывающее окно
-    // var popup = L.popup()
-    //     .setLatLng([lat, long])
-    //     .setContent(String(carNum));
+// Создаем маркер
+// marker = L.marker([lat, long], { title: carNum });
+// markerGroup  Добавить 
+// Всплывающее окно
+// var popup = L.popup()
+//     .setLatLng([lat, long])
+//     .setContent(String(carNum));
 
-    // Добавляем в список
-    // key = carNum;
+// Добавляем в список
+// key = carNum;
 
-    // title = marker.options.title;
-    // lat = marker._latlng.lat;
-    // long = marker._latlng.lng;
+// title = marker.options.title;
+// lat = marker._latlng.lat;
+// long = marker._latlng.lng;
 
-    // data = {
-    //     title,
-    //     lat,
-    //     long
-    // }
+// data = {
+//     title,
+//     lat,
+//     long
+// }
 
-    // carMarker[key] = data;
-    // console.log(carMarker);
+// carMarker[key] = data;
+// console.log(carMarker);
 
-    var featureGroup = L.featureGroup([markers]).addTo(map);
+// var featureGroup = L.featureGroup([markers]).addTo(map);
 
-}
+// }
 
 
-// Отрисовка маркеров
-function markerDrawing(carMarker) {
 
-}
 
-// Удаление маркеров
-function markerDelete(markerId) {
+// }
 
-}
+// // Удаление маркеров
+// function markerDelete(markerId) {
+
+// }
 
 
 // var popup1 = L.popup();
@@ -171,7 +163,3 @@ function markerDelete(markerId) {
 // }
 
 // парсить
-document.querySelectorAll('.parseWS').forEach(el => el.addEventListener('click', () => { parseWSagrosignal(dataAS) }));
-document.querySelectorAll('.addMarker').forEach(el => el.addEventListener('click', () => { addMarker([50.01, 128]) }));
-// document.querySelectorAll('.markerDrawing').forEach(el => el.addEventListener('click', () => { markerDrawing() }));
-document.querySelectorAll('.markerDelete').forEach(el => el.addEventListener('click', () => { markerDelete() }));
