@@ -1,71 +1,95 @@
 // Работа с маркерами
 
-
-// Группа маркеров
-// var carMarkers = L.layerGroup();
-// var carMarkers = {}
-// var carMarkers1 = {}
-
-
-// // Добавляет реквизиты маркера в список
-// function addMarker(carNum = "0", [lat = 50, long = 128]) {
-//     // carNum = String(Math.floor(Math.random() * (5 + 1)) + 0);
-
-//     // Перезаписывает ключи
-//     // carMarkers[carNum] = { latlng: [lat, long] }
-
-//     carMarkers1[carNum] = L.marker([lat, long]).addTo(map);
-//     console.log(carMarkers1);
-// }
-
-// // Отрисовка маркеров
-// function drawMarker() {
-//     // console.log(carMarkers);
-
-//     for (i in carMarkers) {
-//         marker = L.marker(carMarkers[i].latlng, { title: i }).addTo(map);
-//     }
-//     console.log(carMarkers);
-
-// }
-
-
+// Для генерации названий 
 var carMarkers = {}
 // Группа маркеров
 var carMarkersGroop = L.layerGroup();
 
-function addMarker(carNum = "0", [lat = 50, long = 128]) {
+function addMarker([lat = 50, long = 128], carNum = "0") {
 
-    marker = L.marker([lat, long]);
-    marker.options = {
-        title: carNum,
+    // Отладка
+    // carNum = String(Math.floor(Math.random() * 5) + 1);
+    // ln = Math.random();
+
+    // gra = Math.random();
+
+    // lat = 50 - (gra - ln) / 4
+    // long = 128 + (gra + ln) / 4
+    // console.log(lat, long);
+
+    // раб
+    marker = carMarkers[carNum]
+
+    // Если маркер на карте - меняем позицию
+    if (map.hasLayer(marker)) {
+        // Меняем позицию маркера
+        marker.setLatLng([lat, long]);
+
+        console.log("Рисую", marker._leaflet_id);
+        carMarkersGroop.addLayer(marker);
+        // test
+        // marker.addTo(map);
     }
-    carMarkersGroop.addLayer(marker);
+    else {
+
+        carMarkers[carNum] = L.marker([lat, long], { title: carNum }); // Маркер
+        console.log("Создаю маркер")
+        carMarkersGroop.addLayer(carMarkers[carNum]);
+        // test
+        // carMarkers[carNum].addTo(map);
+    }
+
+
+    carMarkers[carNum].options = {  // Опции (проблема с иконками)
+        title: carNum    
+    }
+    carMarkers[carNum].bindPopup(carNum);   // Окно
+    carMarkers[carNum].bindTooltip(`Car: ${carNum}`).openTooltip();    // Надпись при наведении  //.openTooltip()
+
 }
 
+function carFilter(filter = []) {
+    // Фильтрация машин по категории
+
+
+
+}
+
+var busMarker = L.layerGroup();
 
 // Отрисовка маркеров
-function drawMarker() {
-    // carMarkersGroop.addTo(map)
-    console.log(carMarkersGroop.getLayers());
+function drawMarker(carNum) {
+    // for (i in carMarkersGroop._layers) {
+    //     console.log("draw", i);
+
+    //     carMarkersGroop._layers[i].addTo(map)
+    // }
+
+    // marker = L.marker([lat=50.012, long=128]);
+    // busMarker.addLayer(marker)
+    // console.log(busMarker);
+
+
+
 }
 
 // Удалить маркер
-function delMarker(id) {
-    console.log(id);
-    carMarkersGroop.removeLayer(id);
+function delMarker(carNum) {
+    carNum = String(Math.floor(Math.random() * (5 + 1)) + 0);
+    map.removeLayer(carMarkers[carNum])
+
 }
 
 // Удалить маркеры (Очистить)
 function clearMarkers() {
-    console.log("clear");
     carMarkersGroop.clearLayers();
+    console.log(carMarkersGroop);
 }
 
 
 document.querySelectorAll('.parseWS').forEach(el => el.addEventListener('click', () => { parseWSagrosignal(dataAS) }));
-document.querySelectorAll('.addMarker').forEach(el => el.addEventListener('click', () => { addMarker(carNum = 3, [50.01, 128]) }));
-document.querySelectorAll('.drawMarker').forEach(el => el.addEventListener('click', () => { drawMarker() }));
-document.querySelectorAll('.delMarker').forEach(el => el.addEventListener('click', () => { delMarker(3) }));
+document.querySelectorAll('.addMarker').forEach(el => el.addEventListener('click', () => { addMarker([50.01, 128], carNum = '3') }));
+document.querySelectorAll('.drawMarker').forEach(el => el.addEventListener('click', () => { drawMarker('3') }));
+document.querySelectorAll('.delMarker').forEach(el => el.addEventListener('click', () => { delMarker('3') }));
 document.querySelectorAll('.clearMarkers').forEach(el => el.addEventListener('click', () => { clearMarkers() }));
 

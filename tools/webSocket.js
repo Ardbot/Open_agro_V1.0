@@ -57,7 +57,7 @@ function parseWSagrosignal(dataAS) {
                 lat = position[1]
                 long = position[0]
 
-                addMarker(carNum = String(asId), [lat, long])
+                addMarker([lat, long], carNum = String(asId))
                 // data = {};
                 // carMarker.markers.push([carMarker.markers[asId] = asId, [lat, long]]);
             }
@@ -107,7 +107,7 @@ function parseWSagrosignal(dataAS) {
 
 // Создаем маркер
 // marker = L.marker([lat, long], { title: carNum });
-// markerGroup  Добавить 
+// markerGroup  Добавить
 // Всплывающее окно
 // var popup = L.popup()
 //     .setLatLng([lat, long])
