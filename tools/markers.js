@@ -18,33 +18,33 @@ function addMarker([lat = 50, long = 128], carNum = "0") {
     // console.log(lat, long);
 
     // раб
-    marker = carMarkers[carNum]
+    // marker = carMarkers[carNum]
 
-    // Если маркер на карте - меняем позицию
-    if (map.hasLayer(marker)) {
-        // Меняем позицию маркера
-        marker.setLatLng([lat, long]);
+    // // Если маркер на карте - меняем позицию
+    // if (map.hasLayer(marker)) {
+    //     // Меняем позицию маркера
+    //     marker.setLatLng([lat, long]);
 
-        console.log("Рисую", marker._leaflet_id);
-        carMarkersGroop.addLayer(marker);
-        // test
-        // marker.addTo(map);
-    }
-    else {
+    //     console.log("Рисую", marker._leaflet_id);
+    //     carMarkersGroop.addLayer(marker);
+    //     // test
+    //     // marker.addTo(map);
+    // }
+    // else {
 
-        carMarkers[carNum] = L.marker([lat, long], { title: carNum }); // Маркер
-        console.log("Создаю маркер")
-        carMarkersGroop.addLayer(carMarkers[carNum]);
-        // test
-        // carMarkers[carNum].addTo(map);
-    }
+    //     carMarkers[carNum] = L.marker([lat, long], { title: carNum }); // Маркер
+    //     console.log("Создаю маркер")
+    //     carMarkersGroop.addLayer(carMarkers[carNum]);
+    //     // test
+    //     // carMarkers[carNum].addTo(map);
+    // }
 
 
-    carMarkers[carNum].options = {  // Опции (проблема с иконками)
-        title: carNum    
-    }
-    carMarkers[carNum].bindPopup(carNum);   // Окно
-    carMarkers[carNum].bindTooltip(`Car: ${carNum}`).openTooltip();    // Надпись при наведении  //.openTooltip()
+    // carMarkers[carNum].options = {  // Опции (проблема с иконками)
+    //     title: carNum    
+    // }
+    // carMarkers[carNum].bindPopup(carNum);   // Окно
+    // carMarkers[carNum].bindTooltip(`Car: ${carNum}`).openTooltip();    // Надпись при наведении  //.openTooltip()
 
 }
 
@@ -65,9 +65,12 @@ function drawMarker(carNum) {
     //     carMarkersGroop._layers[i].addTo(map)
     // }
 
-    // marker = L.marker([lat=50.012, long=128]);
-    // busMarker.addLayer(marker)
-    // console.log(busMarker);
+    marker = L.marker([lat=50.012, long=128]);
+    // marker.options = {}
+    
+    busMarker.addLayer(marker);
+    busMarker.addTo(map);
+    console.log(busMarker);
 
 
 
