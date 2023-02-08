@@ -4,7 +4,7 @@ import requests
 
 LOGIN = 'login'
 PASSWORD = 'password'
-PATCH = 'D:\DataBase\Сartography\Yield\\'   # Путь куда сохраняем
+PATCH = 'C:\Yield\\'   # Путь куда сохраняем Создать!
 
 # Укажите id
 # machineId = '112233445'
@@ -25,8 +25,10 @@ maxNoOfPoints = 'maxNoOfPoints=4000'
 time = '_=1667871853552'
 
 
+
 def main():
     """ Основной блок """
+    identification()
     # Получаем список зерноуборочной техники
     cars = car_list()
     requests_days(cars)
