@@ -26,7 +26,3 @@ async function cars_list() {
         carsDiv.append(car_li)
     }
 }
-
-
-
-document.querySelectorAll('.refresh_list_cars').forEach(el => el.addEventListener('click', () => { cars_list() }));

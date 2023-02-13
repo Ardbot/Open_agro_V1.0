@@ -37,8 +37,22 @@ function addMarker([lat = 50, long = 128], carNum = "0") {
     }
     else {
 
-        carMarkers[carNum] = L.marker([lat, long], { title: carNum, icon: myIcon}); // Маркер
+        carMarkers[carNum] = L.marker([lat, long], { title: carNum, icon: myIcon }); // Маркер
         console.log("Создаю маркер")
+
+        // Добавляем подпись
+        carMarkers[carNum].bindPopup(carNum);   // Окно
+        carMarkers[carNum].bindTooltip(carNum, {
+            direction: 'bottom',
+            permanent: true,
+            sticky: true,
+            offset: [0, 0],
+            opacity: 0.75,
+            className: 'leaflet-tooltip-own'
+
+        });    // Надпись при наведении  //.openTooltip()
+
+
         carMarkersGroop.addLayer(carMarkers[carNum]);
         // test
         carMarkers[carNum].addTo(map);
@@ -48,16 +62,7 @@ function addMarker([lat = 50, long = 128], carNum = "0") {
     // carMarkers[carNum].options = {  // Опции (проблема с иконками)
     //     title: carNum    
     // }
-    carMarkers[carNum].bindPopup(carNum);   // Окно
-    carMarkers[carNum].bindTooltip(carNum,     {
-        direction: 'bottom',
-        permanent: true,
-        sticky: true,
-        offset: [0, 0],
-        opacity: 0.75,
-        className: 'leaflet-tooltip-own' 
-        
-    });    // Надпись при наведении  //.openTooltip()
+
 }
 
 function carFilter(filter = []) {
@@ -77,9 +82,9 @@ function drawMarker(carNum) {
     //     carMarkersGroop._layers[i].addTo(map)
     // }
 
-    marker = L.marker([lat=50.012, long=128]);
+    marker = L.marker([lat = 50.012, long = 128]);
     // marker.options = {}
-    
+
     busMarker.addLayer(marker);
     busMarker.addTo(map);
     console.log(busMarker);

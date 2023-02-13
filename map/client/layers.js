@@ -1,13 +1,6 @@
 //  Управление слоями
 
 // Подключение базового слоя (подложки)
-// Подключение OSM
-var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  opacity: 1.0, // Прозрачность подложки
-  attribution: '<a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-  minZoom: 0,
-  maxZoom: 20
-}).addTo(map) // Добавляем на карту.
 
 
 // Контура
@@ -16,7 +9,7 @@ var field = L.geoJson(field, {
   onEachFeature: function (feature, lyr) {
 
     // Выводим ярлык с номером поля (можно HTML)
-    let text_html = '<div><h3>Поле №' + feature.properties.Name + '</h3><h4> Площадь: ' + feature.properties.area + ' га</h4></div>'//<button id="map_b1">Путь сюда</button>'
+    let text_html = '<div><h3>Поле №' + feature?.properties?.Name + '</h3><h4> Площадь: ' + feature?.properties?.area + ' га</h4></div>'//<button id="map_b1">Путь сюда</button>'
     lyr.bindPopup(text_html);
     // Выводится ярлык при наведении
     // lyr.bindTooltip("Поле №: "+ feature.properties.Name).openTooltip();
@@ -36,18 +29,11 @@ var baseMaps = {
 
 };
 
-var ros = L.tileLayer('https://gext.ru/rosreestr_xyz/{z}/{x}/{y}.png', {
-  opacity: 1.0, // Прозрачность подложки
-  attribution: '<a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-  minZoom: 0,
-  maxZoom: 20
-}).addTo(map) // Добавляем на карту.
-
 
 
 var overlayMaps = {
   "Поля": field,
-  "Рос": ros
+  "pass":field,
 
 };
 

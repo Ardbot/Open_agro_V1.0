@@ -12,97 +12,23 @@
 </head>
 
 <body>
-<div>
-    <!-- <button class="homeButton">Домой</button>
-    <button onclick="get_geo()">Где машина</button>
-    <button onclick="get_field()">Поля</button>
-    <button class="createTable">Создать таблицу</button> -->
-
-</div>
-<div class="container">
-    <div id="map" class="map brd"></div>
-    <div id="menu" class="menu brd">
-        <div id="user"></div>
-        <div id="geoPos"></div>
-        <!-- <div id="settings"></div> -->
-        <button class="parseWS">Парсить</button> 
-        <button class="addMarker">addMarker</button> 
-        <button class="drawMarker">drawMarker</button> 
-        <button class="delMarker">Удалить маркер</button>
-        <button class="clearMarkers">Очистить маркеры</button>
-
-        <!-- Транспорт -->
-        <button class="listTS">Список транспорта</button>
-        
-        <!-- Настройки в новом окне -->
-        <a href="/tools" target="_blank">🛠 Настройки</a>
-        
+    <div><button class="homeBtn btn">Домой</button></div>
+    <div class="container">
+        <div id="map" class="map brd"></div>
     </div>
-</div>
-<div id="log"></div>
 
+<!-- Грузим скрипты -->
+    <script src="leaflet/leaflet.js"></script>
+    <script src="index.js"></script>
 
-<!-- Подгружаем элементы окна -->
-<!-- Microservices\map\client\menu.js -->
-<!-- <link rel="stylesheet" href="/tools/console/console.css" /> -->
-<!-- <script src="/menu.js" charset="utf-8"></script> -->
+    <!-- Работа с локальным хранилищем -->
+    <script src="/tools/local_DB.js" charset="utf-8"></script>
 
+    <script src="navigation.js"></script>
 
-  <!-- 1. Грузим слои (Заменить одним общим скриптом) -->
-  <script src="/map/client/layers/field.js"></script> 
-  <!-- <script src="/map/client/layers/road.js"></script>
-  <script src="/map/client/layers/alias.js"></script> 
-  <script src="/map/client/layers/kadastr.js"></script> -->
+    <script src="layers.js"></script>
 
-<!-- 2. Грузим инструменты -->
-
-
-<script src="leaflet/leaflet.js"></script>
-<script src="icons/icons.js"></script>
-
-<!-- Консоль -->
-
-<link rel="stylesheet" href="/tools/console/console.css" />
-<script src="/tools/console/console.js" charset="utf-8"></script>
-
-<!-- Работа с локальным хранилищем -->
-<script src="/tools/local_DB.js" charset="utf-8"></script>
-
-<!-- Пользователь -->
-<link rel="stylesheet" href="/tools/users/users.css"/>
-<script src="/tools/users/users.js" charset="utf-8"></script>
-
-<!-- Геопозиция -->
-<script src="/tools/geoPosition.js" charset="utf-8"></script>
-
-<!-- Всплывающие уведомления -->
-<script src="/tools/alert.js" charset="utf-8"></script>
-
-<!-- Основные элементы -->
-<script src="cars.js" charset="utf-8"></script>
-
-<!-- Данные с агросигнала -->
-<!-- <script src="/tools/agrosignal/agrosignal.js" charset="utf-8"></script> -->
-
-
-
-<!-- Маркеры -->
-<script src="/tools/markers.js" charset="utf-8"></script>
-
-<!-- Websocket -->
-<script src="/tools/webSocket.js" charset="utf-8"></script>
-
-<!-- Создание таблиц -->
-<link rel="stylesheet" href="/tools/createTable/createTable.css" />
-<script src="/tools/createTable/createTable.js" charset="utf-8"></script>
-
-<!-- Главный скрипт -->
-<script src="index.js"></script>
-<script src="layers.js"></script>
-
-<!-- Грузим блоки -->
-<script src="navigation.js" charset="utf-8"></script>
-
+    
 </body>
 
 </html>

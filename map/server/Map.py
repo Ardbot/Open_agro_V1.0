@@ -9,7 +9,7 @@ tags = ['map']
 @map_router.get("/home")
 async def map_home_point():
     """ Запрос в БД. Стартовая точка организации"""
-    return [50.0, 128]
+    return [50.05, 128]
 
 @map_router.get("/layers")
 async def return_layers():
