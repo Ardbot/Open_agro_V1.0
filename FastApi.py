@@ -22,8 +22,8 @@ from starlette.staticfiles import StaticFiles
 
 from map.server.Map import map_router
 from RFID.server.RFID_server import map_nfc
-from agrosignal.agrosignal import as_router
-from map.server.users import user_router
+from tools.agrosignal.agrosignal import as_router 
+from map.server.users import user_router 
 app = FastAPI()
 
 

@@ -2,54 +2,64 @@
 // document.cookie = "user=John; secure";
 
 let apiKey = localStorage.getItem('apiKey').slice(1, -1)
-log(apiKey)
+// log(apiKey)
 // let socket = new WebSocket("wss://gis.agrosignal.com/data/play?apiKey=" + apiKey);
 
-socket.onopen = function (e) {
+// socket.onopen = function (e) {
 
-};
+// };
 
-socket.onmessage = function (event) {
-    // log(typeof (event))
-    // log(event.data)
-    // Обрабатываем ответ
-    parseWSagrosignal(event.data);
+// socket.onmessage = function (event) {
+//     // log(typeof (event))
+//     // log(event.data)
+//     // Обрабатываем ответ
+//     parseWSagrosignal(event.data);
 
-};
+// };
 
-socket.onclose = function (event) {
-    if (event.wasClean) {
-        alert(`[close] Соединение закрыто чисто, код: ${event.code} причина=${event.reason}`);
-    } else {
-        // например, сервер убил процесс или сеть недоступна
-        // обычно в этом случае event.code 1006
-        alert(`[close] Соединение прервано. Код: ${event.code}`);
+// socket.onclose = function (event) {
+//     if (event.wasClean) {
+//         alert(`[close] Соединение закрыто чисто, код: ${event.code} причина=${event.reason}`);
+//     } else {
+//         // например, сервер убил процесс или сеть недоступна
+//         // обычно в этом случае event.code 1006
+//         alert(`[close] Соединение прервано. Код: ${event.code}`);
+//     }
+// };
+
+// socket.onerror = function (error) {
+//     alert(`[error]`, error);
+// };
+
+
+let dataAS = { "event": "changes", "data": { "time": 1677715200900, "items": [{ "id": 121253, "time": 1675380523000, "last": 1675380523000, "values": { "rt_time": 1675380523000, "position": [127.50855, 50.2895125] } }, { "id": 121245, "time": 1675380397000, "last": 1675380397000, "values": { "rt_time": 1675380397000, "position": [127.74067, 50.183020000000006] } }, { "id": 121138, "time": 1675380525000, "last": 1675380525000, "values": { "rt_time": 1675380525000, "position": [127.76482333333334, 50.25517333333334] } }, { "id": 121270, "time": 1675380528000, "last": 1675380528000, "values": { "rt_time": 1675380528000, "position": [127.76603916666667, 50.2479125] } }] } }
+// log(typeof (dataAS))
+
+// Соотносит id c номером машины
+function carNumF(asId) {
+    carsList = JSON.parse(localStorage.getItem('car_list'))
+    for (num in carsList) {
+        if (asId in carsList[num]){
+            return carsList[num][asId]
+        }
     }
-};
+}
 
-socket.onerror = function (error) {
-    alert(`[error]`, error);
-};
-
-
-// dataAS = { "event": "changes", "data": { "time": 1677715200900, "items": [{ "id": 121253, "time": 1675380523000, "last": 1675380523000, "values": { "rt_time": 1675380523000, "rt_position": [127.50855, 50.2895125] } }, { "id": 121245, "time": 1675380397000, "last": 1675380397000, "values": { "rt_time": 1675380397000, "rt_position": [127.74067, 50.183020000000006] } }, { "id": 121138, "time": 1675380525000, "last": 1675380525000, "values": { "rt_time": 1675380525000, "rt_position": [127.76482333333334, 50.25517333333334] } }, { "id": 121270, "time": 1675380528000, "last": 1675380528000, "values": { "rt_time": 1675380528000, "rt_position": [127.76603916666667, 50.2479125] } }] } }
-// log(typeof(dataAS.event))
 // Парсим данные с Агросигнала
-
-
 function parseWSagrosignal(dataAS) {
-    ws = JSON.parse(dataAS);
-    // ws = dataAS;
+    // let ws = JSON.parse(dataAS); // прод
+    ws = dataAS;    // Отладка
     // console.log(dataAS);
     // Блок с данными
     if (ws?.event == "changes") {
         items = ws.data.items;
         for (id in items) {
             let asId = items[id].id;
+            num = carNumF(asId);
             let asTime = items[id].time;
             let asLast = items[id].last;
             let asValues = items[id].values;
-            // log(asId, asTime, asLast, asValues)
+            log(num, new Date(asTime), new Date(asLast), asValues)
 
             // Обработка местоположения
             let position = asValues?.position
@@ -57,7 +67,7 @@ function parseWSagrosignal(dataAS) {
                 lat = position[1]
                 long = position[0]
 
-                addMarker([lat, long], carNum = String(asId))
+                addMarker([lat, long], carNum = String(num))
                 // data = {};
                 // carMarker.markers.push([carMarker.markers[asId] = asId, [lat, long]]);
             }
@@ -163,3 +173,10 @@ function parseWSagrosignal(dataAS) {
 // }
 
 // парсить
+
+
+document.querySelectorAll('.parseWS').forEach(el => el.addEventListener('click', () => { parseWSagrosignal(dataAS) }));
+document.querySelectorAll('.addMarker').forEach(el => el.addEventListener('click', () => { addMarker([50.01, 128], carNum = '3') }));
+document.querySelectorAll('.drawMarker').forEach(el => el.addEventListener('click', () => { drawMarker('3') }));
+document.querySelectorAll('.delMarker').forEach(el => el.addEventListener('click', () => { delMarker('3') }));
+document.querySelectorAll('.clearMarkers').forEach(el => el.addEventListener('click', () => { clearMarkers() }));

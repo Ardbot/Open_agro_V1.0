@@ -3,7 +3,8 @@
 .log {
     bottom: 0;
     margin: 0.3em 0em;
-    min-width: 200px;
+    /* height: 100%; */
+    min-width: 300px;
     z-index: 1000;
     background: #414141;
 }

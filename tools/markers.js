@@ -1,5 +1,10 @@
 // Работа с маркерами
 
+// document:
+
+
+
+
 // Для генерации названий 
 var carMarkers = {}
 // Группа маркеров
@@ -18,34 +23,41 @@ function addMarker([lat = 50, long = 128], carNum = "0") {
     // console.log(lat, long);
 
     // раб
-    // marker = carMarkers[carNum]
+    marker = carMarkers[carNum]
 
-    // // Если маркер на карте - меняем позицию
-    // if (map.hasLayer(marker)) {
-    //     // Меняем позицию маркера
-    //     marker.setLatLng([lat, long]);
+    // Если маркер на карте - меняем позицию
+    if (map.hasLayer(marker)) {
+        // Меняем позицию маркера
+        marker.setLatLng([lat, long]);
 
-    //     console.log("Рисую", marker._leaflet_id);
-    //     carMarkersGroop.addLayer(marker);
-    //     // test
-    //     // marker.addTo(map);
-    // }
-    // else {
+        console.log("Рисую", marker._leaflet_id);
+        carMarkersGroop.addLayer(marker);
+        // test
+        marker.addTo(map);
+    }
+    else {
 
-    //     carMarkers[carNum] = L.marker([lat, long], { title: carNum }); // Маркер
-    //     console.log("Создаю маркер")
-    //     carMarkersGroop.addLayer(carMarkers[carNum]);
-    //     // test
-    //     // carMarkers[carNum].addTo(map);
-    // }
+        carMarkers[carNum] = L.marker([lat, long], { title: carNum, icon: myIcon}); // Маркер
+        console.log("Создаю маркер")
+        carMarkersGroop.addLayer(carMarkers[carNum]);
+        // test
+        carMarkers[carNum].addTo(map);
+    }
 
 
     // carMarkers[carNum].options = {  // Опции (проблема с иконками)
     //     title: carNum    
     // }
-    // carMarkers[carNum].bindPopup(carNum);   // Окно
-    // carMarkers[carNum].bindTooltip(`Car: ${carNum}`).openTooltip();    // Надпись при наведении  //.openTooltip()
-
+    carMarkers[carNum].bindPopup(carNum);   // Окно
+    carMarkers[carNum].bindTooltip(carNum,     {
+        direction: 'bottom',
+        permanent: true,
+        sticky: true,
+        offset: [0, 0],
+        opacity: 0.75,
+        className: 'leaflet-tooltip-own' 
+        
+    });    // Надпись при наведении  //.openTooltip()
 }
 
 function carFilter(filter = []) {
@@ -90,9 +102,6 @@ function clearMarkers() {
 }
 
 
-document.querySelectorAll('.parseWS').forEach(el => el.addEventListener('click', () => { parseWSagrosignal(dataAS) }));
-document.querySelectorAll('.addMarker').forEach(el => el.addEventListener('click', () => { addMarker([50.01, 128], carNum = '3') }));
-document.querySelectorAll('.drawMarker').forEach(el => el.addEventListener('click', () => { drawMarker('3') }));
-document.querySelectorAll('.delMarker').forEach(el => el.addEventListener('click', () => { delMarker('3') }));
-document.querySelectorAll('.clearMarkers').forEach(el => el.addEventListener('click', () => { clearMarkers() }));
+
+// L.marker([50.05, 128], {icon: myIcon}).addTo(map);
 
