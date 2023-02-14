@@ -31,10 +31,44 @@ var baseMaps = {
 
 
 
+
 var overlayMaps = {
   "Поля": field,
-  "pass":field,
 
 };
 
 var layerControl = L.control.layers(baseMaps, overlayMaps).addTo(map);
+
+car1 = L.marker([50, 128.02])
+car2 = L.marker([50, 128.03])
+car3 = L.marker([50, 128.05])
+
+// truck
+truck1 = L.marker([50.0, 128])
+truck2 = L.marker([50.03, 128])
+truck3 = L.marker([50.05, 128])
+
+var truck = L.layerGroup()
+  .addLayer(truck1)
+  .addLayer(truck2)
+  .addLayer(truck3)
+
+var car = L.layerGroup()
+  .addLayer(car1)
+  .addLayer(car2)
+  .addLayer(car3)
+
+var allCars = L.layerGroup()
+  .addLayer(truck)
+  .addLayer(car)
+
+// if (layerControl === false) {  // var layerControl set to false in init phase; 
+//   layerControl = L.control.layers().addTo(map);
+// }
+
+// layerControl.addOverlay(allCars, "allCars");
+// layerControl.addOverlay(truck, "truck");
+// layerControl.addOverlay(car, "car");
+// layerControl.addOverlay(car1, "car1");
+
+

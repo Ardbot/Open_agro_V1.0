@@ -26,3 +26,31 @@ async function cars_list() {
         carsDiv.append(car_li)
     }
 }
+
+
+
+
+async function listCar() {
+    let response = await fetch("https://gis.agrosignal.com/units");
+    if (response.ok) { // если HTTP-статус в диапазоне 200-299
+        let cars = await response.json();
+        console.log(cars);
+    } else {
+        log("listCar err: " + response.status + " " + response.text);
+    }
+}
+
+
+document.querySelectorAll('.listCarBtn').forEach(el => el.addEventListener('click', () => { listCar() }));
+
+// Преобразуем список машин в понятный формат
+function parseCar(data) {
+    car = {}
+    car.id = "000";
+    car.number = "X222OP";
+    car.type = "truck";
+    car.value = {};
+    car.value.position = [50, 128];
+    car.value.azimut = 45;
+    return car
+}

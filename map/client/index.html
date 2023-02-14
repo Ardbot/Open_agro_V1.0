@@ -12,13 +12,18 @@
 </head>
 
 <body>
-    <div><button class="homeBtn btn">Домой</button></div>
+    <div>
+        <button class="homeBtn btn">Домой</button>
+        <button class="markersBtn btn">Маркеры</button> 
+        <button class="listCarBtn btn">Машины</button> 
+    </div>
     <div class="container">
         <div id="map" class="map brd"></div>
     </div>
 
-<!-- Грузим скрипты -->
+    <!-- Грузим скрипты -->
     <script src="leaflet/leaflet.js"></script>
+    <script src="leaflet/leaflet.rotatedMarker.js"></script>
     <script src="index.js"></script>
 
     <!-- Работа с локальным хранилищем -->
@@ -28,10 +33,14 @@
 
     <script src="layers.js"></script>
 
-    
+    <script src="icons/icons.js"></script>
+    <script src="markers.js"></script>
+
+
+
     <script src="/tools/webSocket.js"></script>
 
-    
+
 </body>
 
 </html>

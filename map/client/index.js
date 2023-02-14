@@ -17,3 +17,4 @@ var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 function setView(start_point = [50, 128], zoom = 10) {
   map.setView(start_point, zoom)
 }
+
