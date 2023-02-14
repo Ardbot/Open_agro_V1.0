@@ -16,7 +16,10 @@ async function getHome() {
 
 // Кнопка "Домой"
 async function home() {
-    getHome();
+    if (map_home.read() == undefined) {
+        // Запрос домашней точки
+        await getHome();
+    }
     setView(map_home.read(), map_zoom.read())
 }
 document.querySelectorAll('.homeBtn').forEach(el => el.addEventListener('click', () => { home() }));
@@ -34,7 +37,10 @@ map.on("zoomend", function () {
 })
 
 // Устанавливаем вид карты в точку
-setView(map_centre.read(), map_zoom.read())
+if (map_centre.read() != undefined & map_zoom.read() != undefined) {
+    setView(map_centre.read(), map_zoom.read())
+}
+
 
 
 var popup = L.popup();
@@ -48,7 +54,7 @@ var dawew = '<h2>Label</h2>'
 function locationPopup(e, content = "no_data") {
     popup
         .setLatLng(e.latlng)
-        .setContent(JSON.stringify([e.latlng['lat'], e.latlng['lng']])) 
+        .setContent(JSON.stringify([e.latlng['lat'], e.latlng['lng']]))
         .openOn(map);
 }
 
