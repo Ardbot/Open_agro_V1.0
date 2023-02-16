@@ -1,32 +1,24 @@
-// Запросы к "Агросигнал" из браузера.
+// Получение данных Агросигнала (со сторонего сервера)
 
-// let apiKey = "xxx-xxx-xxx-xxxx"
 // let apiKey = localStorage.getItem('apiKey').slice(1, -1)    // Берём из локального хранилища (Небезопасно. Использовать куки) 
 
 
-
-
 // Список транспортных средств
-async function getVehicles() {
-    try {
-        // console.log("dwa");
-        let url = 'https://gis.agrosignal.com/units?apiKey=' + apiKey; 
-        // let url = 'https://example.com'; 
-        let response = await fetch(url,{
-            method: 'GET',    
-            withCredentials: true,    
-            crossorigin: true,    
-            mode: 'no-cors',
-        });
-        // let data = await response.json(); // читаем ответ в формате JSON
-        // console.log(data);
-        console.log(response.json);
-        // alert(data[0].author.login);
-    }
-    catch (err) {
-        console.log("Err:", err);
-    }
+async function listCar() {
+    // let response = await fetch("/as/car_list");
+    let response = await fetch("https://ardbot.ru:8443/tools/car_list.json");
 
+    if (response.ok) { // если HTTP-статус в диапазоне 200-299
+        let cars = await response.json();
+        // console.log("cars", cars);
+        // Сохраняем в локальное хранилище браузера]
+        localStorage.setItem('carList', JSON.stringify(cars))
+        // return cars  
+    } else {
+        console.log("listCar err: " + response.status + " " + response.text);
+    }
 }
 
-document.querySelectorAll('.listAuto').forEach(el => el.addEventListener('click', () => { getVehicles() }));
+listCar()
+
+document.querySelectorAll('.listCarBtn').forEach(el => el.addEventListener('click', () => { listCar() }));

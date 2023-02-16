@@ -6,7 +6,7 @@ as_router = APIRouter(
 prefix='/as', 
 tags = ['Agrosignal'] 
 )
-
+# example.com/as/track
 @as_router.get("/track")
 async def request_track(unitId="121051", start="2023-01-17T15:00:00.000Z", end="2023-01-18T14:59:00.000Z"):
     """ Запрос работ агросигнала"""
@@ -42,13 +42,16 @@ async def car_list():
         # return data.json()
 
         car_id = data.get("data")
-        car = []
+        car = {}
         for id in car_id:
-            info = {id.get("id") : id.get("number")}
-            car.append(info)
-            # car.append(id.get("id"))
+            car[id.get("id")] = {
+                "number": id.get("number"),
+                "unitType":id.get("unitType")
+            }
 
         print(len(car))
         return car
     except: 
         print("err")
+
+        

@@ -36,11 +36,12 @@ else {
 // let dataAS = { "event": "changes", "data": { "time": 1677715200900, "items": [{ "id": 121253, "time": 1675380523000, "last": 1675380523000, "values": { "rt_time": 1675380523000, "position": [127.50855, 50.2895125] } }, { "id": 121245, "time": 1675380397000, "last": 1675380397000, "values": { "rt_time": 1675380397000, "position": [127.74067, 50.183020000000006] } }, { "id": 121138, "time": 1675380525000, "last": 1675380525000, "values": { "rt_time": 1675380525000, "position": [127.76482333333334, 50.25517333333334] } }, { "id": 121270, "time": 1675380528000, "last": 1675380528000, "values": { "rt_time": 1675380528000, "position": [127.76603916666667, 50.2479125] } }] } }
 
 // Соотносит id c номером машины
-function carNumF(asId) {
-    carsList = JSON.parse(localStorage.getItem('car_list'))
-    for (num in carsList) {
-        if (asId in carsList[num]) {
-            return carsList[num][asId]
+function carNumF(id) {
+    carsList = JSON.parse(localStorage.getItem('carList'))
+    for (id in carsList) {
+        if (id in carsList[id]) {
+            console.log(carList[id].number);
+            return carList[num].number;
         }
     }
 }
@@ -53,11 +54,13 @@ function parseWSagrosignal(dataAS) {
     // Блок с данными
     if (ws?.event == "changes") {
         items = ws.data.items;
-        console.log(items);
+        // console.log(items);
         for (id in items) {
-            let asId = items[id].id;
-            // num = carNumF(asId);
-            num = asId;
+
+            // Информация о ТС
+            options ={}
+            options.id = items[id].id;
+            // num = asId;
 
             let asTime = items[id].time;
             let asLast = items[id].last;
@@ -72,7 +75,7 @@ function parseWSagrosignal(dataAS) {
                 az = asValues.azimuth
 
                 // addMarker([lat, long], carNum = String(num))
-                addMarker([lat, long], carNum = String(num), azimuth=az)
+                addMarker([lat, long], carNum = String(items[id].id))
 
                 // console.log("pos", lat, long, carNum, );
             }
