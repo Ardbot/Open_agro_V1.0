@@ -32,7 +32,7 @@ var carMarkers = {}
 // Группа маркеров
 // var carMarkersGroop = L.layerGroup();
 
-function addMarker([lat = 50, long = 128], carNum = "0", carNumber, icon, azimuth, carType = "other") {
+function addMarker([lat = 50, long = 128], id = 0) { // carNum = "0", carNumber, icon, azimuth, carType = "other"
 
     // // Отладка
     // carNum = String(Math.floor(Math.random() * 5) + 1);
@@ -43,6 +43,42 @@ function addMarker([lat = 50, long = 128], carNum = "0", carNumber, icon, azimut
     // lat = 50 - (gra - ln) / 4
     // long = 128 + (gra + ln) / 4
 
+    // Фильтр значений
+    carType = carList[marker.id].unitType;
+    console.log(carType);
+
+    switch (carType) {
+        case "truck":
+            truckGroop.addLayer(marker).addTo(map);
+            break;
+        case "tractor":
+            tractorsGroop.addLayer(marker);
+            break;
+        // case "specialists":
+        //     specialistsGroop.addLayer(marker);
+        //     break;
+        case "vehicle":
+            vehicleGroop.addLayer(marker);
+            break;
+        case "tanker":
+            tankerGroop.addLayer(marker);
+            break;
+        case "snail":
+            snailGroop.addLayer(marker);
+            break;
+        case "harvester":
+            harvesterGroop.addLayer(marker);
+            break;
+
+        default:
+            // Иначе создать слой с категорией
+
+            // Или прочее
+            otherGroop.addLayer(marker);
+    }
+}
+
+document.querySelectorAll('.markersBtn').forEach(el => el.addEventListener('click', () => { addMarker(["50.03", "128"]) }));
 
     // Если маркер в группе - меняем позицию
     if (carMarkers[carNum]) {
@@ -51,11 +87,6 @@ function addMarker([lat = 50, long = 128], carNum = "0", carNumber, icon, azimut
     }
 
     else {
-
-
-        // Инициализация параметров маркера
-        // options = 
-
         carNumber = carList[carNum].number;
 
         // Создаем маркер
@@ -81,46 +112,18 @@ function addMarker([lat = 50, long = 128], carNum = "0", carNumber, icon, azimut
 }
 
 // Сортируем ТС по категории. Данные с локального хранилища.
-function filterCar(marker) {
+// function filterCar(marker) {
 
-    carType = carList[marker.id].unitType;
-    if (carType == "truck") {
-        truckGroop.addLayer(marker);
-        // console.log("groop:", "truck");
-    }
-    else
+    
+//     if (carType == "truck") {
+//         truckGroop.addLayer(marker);
+//         // console.log("groop:", "truck");
+//     }
+//     else
 
-        switch (carType) {
-            case "truck":
-                truckGroop.addLayer(marker).addTo(map);
-                break;
-            case "tractor":
-                tractorsGroop.addLayer(marker);
-                break;
-            // case "specialists":
-            //     specialistsGroop.addLayer(marker);
-            //     break;
-            case "vehicle":
-                vehicleGroop.addLayer(marker);
-                break;
-            case "tanker":
-                tankerGroop.addLayer(marker);
-                break;
-            case "snail":
-                snailGroop.addLayer(marker);
-                break;
-            case "harvester":
-                harvesterGroop.addLayer(marker);
-                break;
 
-                
 
-            default:
-                otherGroop.addLayer(marker);
-        }
-}
 
-document.querySelectorAll('.markersBtn').forEach(el => el.addEventListener('click', () => { addMarker(["50.03", "128"]) }));
 
 
 // Удалить маркер
