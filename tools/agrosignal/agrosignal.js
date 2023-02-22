@@ -6,7 +6,7 @@
 // Список транспортных средств
 async function listCar() {
     // let response = await fetch("/as/car_list");
-    let response = await fetch("https://ardbot.ru:8443/tools/car_list.json");
+    let response = await fetch("/tools/car_list.json");
 
     if (response.ok) { // если HTTP-статус в диапазоне 200-299
         let cars = await response.json();
@@ -20,5 +20,6 @@ async function listCar() {
 }
 
 listCar()
+localStorage.setItem('apiKey', JSON.stringify("73...e8").slice(1,-1))
 
 document.querySelectorAll('.listCarBtn').forEach(el => el.addEventListener('click', () => { listCar() }));
