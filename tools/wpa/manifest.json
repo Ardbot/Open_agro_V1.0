@@ -1,0 +1,15 @@
+{
+  "name": "Open Agro",
+  "short_name": "Open_agro",
+  "lang": "ru-RU",
+  "start_url": "/wpa/index.html",
+  "display": "fullscreen",
+  "theme_color": "#282828",
+  "background_color": "#ffff00",
+  "icons": [
+    {
+      "src": "https://a.tile.openstreetmap.org/10/874/347.png",
+      "sizes": "256x256"
+    }
+  ]
+}
