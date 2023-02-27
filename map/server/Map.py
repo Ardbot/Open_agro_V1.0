@@ -2,7 +2,7 @@
 from FastApi import *
 
 map_router = APIRouter( 
-prefix='/map', 
+prefix='/api/map',  # /api/ 
 tags = ['map'] 
 )
 

@@ -20,26 +20,26 @@
 
 // Если serviceWorker поддерживается, то 
 if ("serviceWorker" in navigator) {
-    navigator.serviceWorker
-      .register("sw.js")
-      .then(serviceWorker => {
-        console.log("Service Worker зарегистрирован: ", "serviceWorker");
-      })  
-      .catch(error => {
-        console.error("Ошибка регистрации Service Worker: ", error);
-      });
-  }
+  navigator.serviceWorker
+    .register("sw.js")
+    .then(serviceWorker => {
+      console.log("Service Worker зарегистрирован: ", "serviceWorker");
+    })
+    .catch(error => {
+      console.error("Ошибка регистрации Service Worker: ", error);
+    });
+}
 
-  navigator.serviceWorker.onmessage = event => {
-    const message = JSON.parse(event.data);
-    // console.log("cache:", message);
-  };
+navigator.serviceWorker.onmessage = event => {
+  const message = JSON.parse(event.data);
+  console.log("cache:", message);
+};
 
 
 
-async function getId(){
+async function getId() {
   response = await fetch("/api/users/id");
   rr = await response.json();
-  console.log(rr);
+  // console.log("f()", rr);
   return rr
 }
